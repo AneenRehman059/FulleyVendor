@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/fragmentContainerr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">android:background="#00000000"
+
+
+            <FrameLayout
+                android:id="@+id/fragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="?attr/actionBarSize" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            app:cardCornerRadius="@dimen/_6sdp"
+            app:cardElevation="@dimen/_1sdp"
+            app:cardUseCompatPadding="true">app:cardBackgroundColor="@color/primaryLight"
+
+
+            <com.ismaeldivita.chipnavigation.ChipNavigationBar
+                android:id="@+id/ChipNavigationBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:cnb_menuResource="@menu/bottom_nav_menu"
+                app:cnb_orientationMode="horizontal"
+                app:cnb_radius="@dimen/_6sdp" />
+
+        </androidx.cardview.widget.CardView>
+
+        android:background="@drawable/top_round_style"
+        android:elevation="@dimen/_6sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cnb_unselectedColor="@color/secondary"
+        android:backgroundTint="@color/primaryLight"
+
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

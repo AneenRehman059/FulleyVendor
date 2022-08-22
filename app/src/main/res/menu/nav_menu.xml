@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Home"
+            android:icon="@drawable/ic_home"
+            android:title="Home"
+            android:menuCategory="secondary"/>
+        <item
+            android:id="@+id/Profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile"
+            android:menuCategory="secondary"/>
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/ic_baseline_power_"
+            android:title="Logout"
+            android:menuCategory="secondary"/>
+<!--        <item
+            android:id="@+id/promo_code"
+            android:icon="@drawable/promo_code"
+            android:title="Promo-codes"
+            android:menuCategory="secondary"/>
+        <item
+            android:id="@+id/orders"
+            android:icon="@drawable/orders"
+            android:title="Orders"
+            android:menuCategory="secondary"/>-->
+
+    </group>
+
+    <!--<item android:title=""
+        android:menuCategory="secondary">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/Logout"
+                    android:icon="@drawable/ic_logout_button"
+                    android:title="Logout"
+                    android:checkableBehavior="single"/>
+        &lt;!&ndash;        <item
+                    android:id="@+id/support"
+                    android:icon="@drawable/support"
+                    android:title="Support"
+                    android:checkableBehavior="single"/>&ndash;&gt;
+            </group>
+        </menu>
+    </item>-->
+</menu>
