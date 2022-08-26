@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment {
     }
 
     FragmentHomeBinding binding;
+    LinearLayoutCompat layout_super;
 
     SharedPrefManager sharedPrefManager;
     ProgressDialog progressDialog;
@@ -48,7 +50,7 @@ public class HomeFragment extends Fragment {
     LinearLayout indicatorLay, tab0, tab1, tab2, tab3;
     SliderAdapter sliderAdapter;
 
-    ImageView imageView, imageView2;
+    ImageView imageView, imageView2,notification_btn;
 
     ImageSlider imageSlider;
     List<SlideModel> list = new ArrayList<>();//default list
@@ -72,13 +74,32 @@ Button btnScanQr;
         indicatorLay = view.findViewById(R.id.indicatorLay);
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
 
+        layout_super = view.findViewById(R.id.super_layout);
+
         imageView = view.findViewById(R.id.imageView);
         imageView2 = view.findViewById(R.id.imageView2);
+        notification_btn = view.findViewById(R.id.btn_notification);
 
         tab0 = view.findViewById(R.id.tab0);
         tab1 = view.findViewById(R.id.tab1);
         tab2 = view.findViewById(R.id.tab2);
         tab3 = view.findViewById(R.id.tab3);
+
+        layout_super.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplication(),Super_Sale_Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        notification_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplication(),NotificationHere.class);
+                startActivity(intent);
+            }
+        });
 
 
         List<SliderItems> sliderItems = new ArrayList<>();

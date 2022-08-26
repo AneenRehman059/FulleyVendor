@@ -43,6 +43,16 @@
             </TextView>
 
             <ImageView
+                android:id="@+id/btn_notification"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/btn_contactUs"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_notification"
+                app:tint="@color/white" />
+
+            <ImageView
                 android:id="@+id/btn_contactUs"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -191,7 +201,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Rs. "
+                                        android:text="Ltrs. "
                                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                         android:textColor="@color/white"
                                         android:textStyle="bold" />
@@ -233,6 +243,7 @@
                                     <androidx.appcompat.widget.LinearLayoutCompat
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:id="@+id/super_layout"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
                                         android:gravity="center"
