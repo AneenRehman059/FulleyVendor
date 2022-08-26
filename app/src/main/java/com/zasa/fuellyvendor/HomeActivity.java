@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ChipNavigationBar.setBackground(null);
         //set home selected
         ChipNavigationBar.setItemSelected(R.id.home, true);
-        ChipNavigationBar.showBadge(R.id.notifications, 10);
+//        ChipNavigationBar.showBadge(R.id.notifications, 10);
 
         bottomNavigation();
 
@@ -86,8 +86,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.home:
                         fragment = new HomeFragment();
                         break;
-                    case R.id.notifications:
-                        fragment = new NotificationFragment();
+                    case R.id.ledger:
+                        fragment = new LedgerFragment();
                         break;
                     case R.id.profile:
                         fragment = new ProfileFragment();
