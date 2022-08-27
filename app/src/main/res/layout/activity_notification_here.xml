@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/ic_arrow_back_white"/>
+            android:background="@drawable/ic_arrow_back"/>
 
         <TextView
             android:id="@+id/tvUserName"
