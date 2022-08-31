@@ -17,6 +17,9 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import com.zasa.fuellyvendor.Fragments.LedgerFragment;
+import com.zasa.fuellyvendor.Fragments.MoreFragment;
+import com.zasa.fuellyvendor.Fragments.SettingsFragment;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.databinding.ActivityHomeBinding;
 
@@ -89,9 +92,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.ledger:
                         fragment = new LedgerFragment();
                         break;
-                    case R.id.profile:
-                        fragment = new ProfileFragment();
-                        break;
+//                    case R.id.profile:
+//                        fragment = new ProfileFragment();
+//                        break;
                     case R.id.settings:
                         fragment = new SettingsFragment();
                         break;
@@ -135,11 +138,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(new Intent(context, HomeActivity.class));
                 }
                 break;
-            case R.id.Profile:
-                drawerLayout.closeDrawer(GravityCompat.START);
-               // startActivity(new Intent(context, ProfileActivity.class));
-                loadFragment(new ProfileFragment());
-                break;
+//            case R.id.Profile:
+//                drawerLayout.closeDrawer(GravityCompat.START);
+//               // startActivity(new Intent(context, ProfileActivity.class));
+//                loadFragment(new ProfileFragment());
+//                break;
 
            /* case R.id.favorite:
                 drawerLayout.closeDrawer(GravityCompat.START);

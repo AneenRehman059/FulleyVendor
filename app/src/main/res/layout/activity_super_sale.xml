@@ -52,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/round_corner_background"
-            android:padding="10dp"
+            android:padding="15dp"
             android:text=""
-            android:textColor="@color/colorText" />
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,10 +62,10 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/round_corner_background"
-            android:padding="10dp"
+            android:padding="15dp"
             android:layout_marginLeft="5dp"
             android:text="Super's Sale:"
-            android:textColor="@color/colorText" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

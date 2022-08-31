@@ -1,4 +1,4 @@
-package com.zasa.fuellyvendor;
+package com.zasa.fuellyvendor.Fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zasa.fuellyvendor.HomeActivity;
+import com.zasa.fuellyvendor.R;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,9 +35,8 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
     }
 
     LinearLayout fromlayout, tolayout, main_date_layout;
-    TextView tvFromdate, tvTodate,ledger_date;
+    TextView tvFromdate, tvTodate,ledger_date,startDate,endDate;
     DatePickerDialog.OnDateSetListener setListener;
-    ImageButton calendar_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,21 +44,18 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ledger, container, false);
 
-        calendar_btn = view.findViewById(R.id.calendar);
+
         fromlayout = view.findViewById(R.id.from_date_layout);
         tolayout = view.findViewById(R.id.to_date_layout);
         main_date_layout = view.findViewById(R.id.main_layout_date);
         tvFromdate = view.findViewById(R.id.tv_from_date);
         tvTodate = view.findViewById(R.id.tv_to_date);
-        ledger_date = view.findViewById(R.id.ledger_date_time);
 
-        calendar_btn.setOnClickListener(this);
+
         fromlayout.setOnClickListener(this);
         tolayout.setOnClickListener(this);
 
-        Calendar calendar = Calendar.getInstance();
-        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        ledger_date.setText(currentDate);
+
 
         return view;
     }
@@ -64,14 +63,11 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.calendar:
-                if (main_date_layout.getVisibility() == View.VISIBLE) {
-                    main_date_layout.setVisibility(View.GONE);
-                }
-                else{
-                    main_date_layout.setVisibility(View.VISIBLE);
-                }
+
+            case R.id.back_img:
+                getActivity().onBackPressed();
                 break;
+
             case R.id.from_date_layout:
 
 

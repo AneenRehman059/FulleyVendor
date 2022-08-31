@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.PumpDetailFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pump Owner Detail"
+            android:layout_marginTop="30dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner Name"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Number"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Landline Number"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OMC Company"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="15dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangel_shape"
+            android:drawSelectorOnTop="true">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:entries="@array/companies_array"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:spinnerMode="dialog"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Company Operated"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YES"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="NO" />
+
+        </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bank Account Number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:layout_marginTop="50dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Title"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="15dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Zafar Sulaiman"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Number"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="15dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:inputType="number"
+            android:hint="12345678912345"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manager 1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Number"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manager 2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Number"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            style="@style/style_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Wazir Filling Station"
+            android:textColor="@color/black"
+            android:textColorHint="#72000000"
+            app:boxStrokeColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Take picture of Fuel Pump"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"/>
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/pump_img"
+            android:src="@drawable/ic_baseline_camera_alt_24"
+            android:background="@drawable/camera_bg"
+            android:layout_gravity="center"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btns_bg"
+                android:layout_alignParentBottom="true"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:paddingEnd="12dp"
+                android:text="@string/contine"
+                android:textAllCaps="false" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

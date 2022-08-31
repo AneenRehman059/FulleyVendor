@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
+import com.zasa.fuellyvendor.HomeActivity;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.R;
 import com.zasa.fuellyvendor.Utils.Internet;
@@ -158,9 +160,26 @@ public class SplashActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        progressBar.setVisibility(View.GONE);
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                        finish();
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
+                        boolean hasLoggedIn = sharedPreferences.getBoolean("hasLoggedIn",false);
+
+                        if (hasLoggedIn){
+                            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        else {
+                            progressBar.setVisibility(View.GONE);
+                            Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+//                        progressBar.setVisibility(View.GONE);
+//                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                        finish();
                     }
                 }, SPLASH_SCREEN_TIME_OUT);
             }

@@ -8,11 +8,11 @@
             android:icon="@drawable/ic_home"
             android:title="Home"
             android:menuCategory="secondary"/>
-        <item
-            android:id="@+id/Profile"
-            android:icon="@drawable/ic_person"
-            android:title="Profile"
-            android:menuCategory="secondary"/>
+<!--        <item-->
+<!--            android:id="@+id/Profile"-->
+<!--            android:icon="@drawable/ic_person"-->
+<!--            android:title="Profile"-->
+<!--            android:menuCategory="secondary"/>-->
         <item
             android:id="@+id/Logout"
             android:icon="@drawable/ic_baseline_power_"
