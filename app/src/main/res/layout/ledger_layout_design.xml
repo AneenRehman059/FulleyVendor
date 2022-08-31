@@ -2,21 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
-
-    android:background="@drawable/ledger_item_bg"
     android:orientation="vertical">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ledger_item_bg"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/date_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="1"
         android:gravity="center"
         android:padding="10dp"
-        android:text="8/26/2022"
+        android:text="@string/_8_26_2022"
         android:textColor="@color/white" />
 
     <LinearLayout
@@ -31,8 +44,7 @@
             android:layout_margin="10dp"
             android:maxLines="2"
             android:padding="10dp"
-            android:text="Fuel up LED2022, Sabroso Private Ltd \n
-at PSO Fateh Garh"
+            android:text="@string/fuel_up_led2022_sabroso_private_ltd_n_at_pso_fateh_garh"
             android:textColor="@color/white" />
 
         <LinearLayout
@@ -47,7 +59,7 @@ at PSO Fateh Garh"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="Rs 20,0000"
+                android:text="@string/rs_20_0000"
                 android:textColor="@color/half_white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -56,11 +68,11 @@ at PSO Fateh Garh"
                 android:id="@+id/super_total_litre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Ltr 20"
+                android:text="@string/ltr_20"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -74,5 +86,6 @@ at PSO Fateh Garh"
         android:background="@color/white">
 
     </LinearLayout>
-
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
