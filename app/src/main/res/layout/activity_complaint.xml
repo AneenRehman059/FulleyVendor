@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Change_Tpin_Activity">
+    tools:context=".ComplaintActivity">
 
     <RelativeLayout
         android:id="@+id/lay1"
@@ -28,48 +28,63 @@
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Change Password"
+            android:text="Complaint"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/white"
             android:textStyle="bold">
 
         </TextView>
 
+        <ImageView
+            android:id="@+id/btn_contactUs"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingVertical="5dp"
+            android:scaleType="fitCenter"
+            app:tint="@color/white" />
+        android:src="@drawable/ic_phone"
+
+
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/enter_existing_password"
+            android:text="Select Complaint"
             android:textColor="@color/colorText"
             android:layout_marginTop="20dp"/>
 
-        <EditText
-            style="@style/style_edittext"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangel_shape"
+        android:drawSelectorOnTop="true">
+        <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/existing_tpin"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:hint="* * * *"
-            android:padding="15dp"
-            android:inputType="number"
-            android:maxLength="4"
-            android:textColor="@color/black"
-            android:textColorHint="#72000000"
-            app:boxStrokeColor="@color/black"
-            />
+            android:entries="@array/company_complaint"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_password"
+            android:text="Add Description"
             android:textColor="@color/colorText"
             android:layout_marginTop="20dp"/>
 
@@ -77,61 +92,21 @@
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/new_tpin"
             android:layout_marginTop="10dp"
-            android:hint="* * * *"
-            android:inputType="number"
             android:padding="15dp"
-            android:maxLength="4"
+            android:maxLines="2"
+            android:hint="Write Desription"
             android:textColor="@color/black"
             android:textColorHint="#72000000"
             app:boxStrokeColor="@color/black"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confirm_new_password"
-            android:textColor="@color/colorText"
-            android:layout_marginTop="20dp"/>
-
-
-        <EditText
-            style="@style/style_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/conform_tpin"
-            android:layout_marginTop="10dp"
-            android:hint="* * * *"
-            android:inputType="number"
-            android:padding="15dp"
-            android:maxLength="4"
-            android:textColor="@color/black"
-            android:textColorHint="#72000000"
-            app:boxStrokeColor="@color/black"
-            />
-
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show Password"
-            android:id="@+id/show_pass"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/primary"/>
-
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
+            android:background="@drawable/btns_bg"
+            android:text="Submit Complaint"
             android:textAllCaps="false"
-            android:layout_marginTop="@dimen/_160sdp"
-            />
-
+            android:layout_marginTop="50dp"/>
     </LinearLayout>
-
-
 </LinearLayout>

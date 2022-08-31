@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.zasa.fuellyvendor.AfterSignup1;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.R;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
@@ -75,9 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-
-
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, AfterSignup1.class));
+//        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
