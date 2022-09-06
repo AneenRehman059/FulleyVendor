@@ -16,17 +16,18 @@
     <item
         android:id="@+id/ledger"
         android:icon="@drawable/ledger"
-        android:title="Ledger" />
+        android:title="Ledger"
+        />
+    <item
+        android:id="@+id/empty"
+        android:title=""
+        />
 
 
 <!--    <item-->
 <!--        android:id="@+id/profile"-->
 <!--        android:icon="@drawable/ic_person"-->
 <!--        android:title="Profile" />-->
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings" />
 
 
     <item
@@ -34,4 +35,12 @@
         android:icon="@drawable/ic_more"
         android:title="More" />
 
-</menu>
+
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+
+
+  </menu>

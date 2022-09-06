@@ -170,7 +170,7 @@
                             android:id="@+id/signupPin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPassword"
+                            android:inputType="number"
                             android:textColor="@color/black"
                             android:textColorHint="#72000000" />
 
@@ -200,7 +200,7 @@
                             android:id="@+id/signupCnfPin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPassword"
+                            android:inputType="number"
                             android:textColor="@color/black"
                             android:textColorHint="#72000000" />
 
@@ -217,6 +217,7 @@
                         android:onClick="SignUpBtn"
                         android:padding="@dimen/_8sdp"
                         android:text="Continue"
+                        android:id="@+id/signupBtn"
                         android:textColor="@color/white"
                         app:rippleColor="@color/primary"
                         app:strokeColor="@color/primary"

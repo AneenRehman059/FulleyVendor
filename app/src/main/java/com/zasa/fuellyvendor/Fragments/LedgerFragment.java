@@ -122,7 +122,7 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((HomeActivity) requireActivity()).setDrawerUnlocked();
+//        ((HomeActivity) requireActivity()).setDrawerUnlocked();
 
     }
 

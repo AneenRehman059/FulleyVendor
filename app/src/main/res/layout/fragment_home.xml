@@ -18,14 +18,13 @@
             android:background="@color/primary">
 
             <ImageView
-                android:id="@+id/btnProfile"
+                android:id="@+id/btnLogout"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingVertical="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_menu"
-                app:tint="@color/white" />
+                android:src="@drawable/ic_logout" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -270,6 +269,7 @@
                                     <androidx.appcompat.widget.LinearLayoutCompat
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:id="@+id/hi_oct_layout"
                                         android:layout_marginHorizontal="@dimen/_1sdp"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
@@ -296,6 +296,7 @@
                                     <androidx.appcompat.widget.LinearLayoutCompat
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:id="@+id/layout_diesel"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
                                         android:gravity="center"
@@ -561,21 +562,21 @@
                             android:textStyle="bold" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <Button
-                        android:id="@+id/btnScanQr"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-                        android:layout_width="@dimen/_180sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginVertical="@dimen/_35sdp"
-                        android:backgroundTint="@color/primary"
-                        android:elevation="@dimen/_2sdp"
-                        android:padding="@dimen/_8sdp"
-                        android:text="Scan Qr Code"
-                        android:textColor="@color/white"
-                        app:rippleColor="@color/primary"
-                        app:strokeColor="@color/primary"
-                        app:strokeWidth="0.5dp" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btnScanQr"-->
+<!--                        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"-->
+<!--                        android:layout_width="@dimen/_180sdp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:layout_marginVertical="@dimen/_35sdp"-->
+<!--                        android:backgroundTint="@color/primary"-->
+<!--                        android:elevation="@dimen/_2sdp"-->
+<!--                        android:padding="@dimen/_8sdp"-->
+<!--                        android:text="Scan Qr Code"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        app:rippleColor="@color/primary"-->
+<!--                        app:strokeColor="@color/primary"-->
+<!--                        app:strokeWidth="0.5dp" />-->
 
 
 

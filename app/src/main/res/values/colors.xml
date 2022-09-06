@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="red">#FF0000</color>
     <color name="dialog_text_color">#5D5E60</color>
     <color name="colorHint">#A09F9F</color>
     <color name="primaryDark">#48ad83</color>

@@ -1,42 +1,54 @@
 package com.zasa.fuellyvendor.Login;
 
+import static com.zasa.fuellyvendor.Constants.FINGER_PRINT_PREFS;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.zasa.fuellyvendor.AfterSignup1;
+import com.zasa.fuellyvendor.Fragments.PumpDetailFragment;
 import com.zasa.fuellyvendor.HomeActivity;
+import com.zasa.fuellyvendor.HomeFragment;
 import com.zasa.fuellyvendor.R;
 import com.zasa.fuellyvendor.SignUp.SignUpActivity;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
 import com.zasa.fuellyvendor.databinding.ActivityLoginBinding;
-import com.zasa.fuellyvendor.databinding.ActivitySignUpBinding;
 
-public class LoginActivity extends AppCompatActivity {
+import java.util.concurrent.Executor;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 public static String PREFS_NAME="MyPrefsFile";
 
     ActivityLoginBinding binding;
 
-
     ProgressDialog progressDialog;
     SharedPrefManager sharedPrefManager;
     Context context;
-
-
-
+    ImageView ib_fingerlogin;
+    TextView msgtex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -57,24 +69,23 @@ public static String PREFS_NAME="MyPrefsFile";
 
         }
 
-        binding.btnFingerprintLock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Biometric lock is under processing!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        binding.btnFingerprintLock.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context, "Biometric lock is under processing!", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
 
 
     }
-
-
 
     public void forgetPassword(View view) {
     }
 
     public void SignUpBtn(View view) {
-        startActivity(new Intent(this, SignUpActivity.class));
+        startActivity(new Intent(this, AfterSignup1.class));
 
     }
 
@@ -121,6 +132,11 @@ public static String PREFS_NAME="MyPrefsFile";
         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         finish();
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

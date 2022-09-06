@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.squareup.picasso.Picasso;
+import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
 import com.zasa.fuellyvendor.databinding.FragmentHomeBinding;
 
@@ -33,14 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
     FragmentHomeBinding binding;
-    LinearLayoutCompat layout_super;
+    LinearLayoutCompat layout_super, layout_hi_oct, layout_diesel;
 
     SharedPrefManager sharedPrefManager;
     ProgressDialog progressDialog;
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment {
     LinearLayout indicatorLay, tab0, tab1, tab2, tab3;
     SliderAdapter sliderAdapter;
 
-    ImageView imageView, imageView2,notification_btn;
+    ImageView imageView, imageView2,notification_btn,logout_btn;
 
     ImageSlider imageSlider;
     List<SlideModel> list = new ArrayList<>();//default list
@@ -70,14 +71,17 @@ Button btnScanQr;
         progressDialog.setMessage("Please Wait...");
         sharedPrefManager = new SharedPrefManager(context);
 
-        btnScanQr = view.findViewById(R.id.btnScanQr);
+//        btnScanQr = view.findViewById(R.id.btnScanQr);
         indicatorLay = view.findViewById(R.id.indicatorLay);
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider);
 
         layout_super = view.findViewById(R.id.super_layout);
+        layout_hi_oct = view.findViewById(R.id.hi_oct_layout);
+        layout_diesel = view.findViewById(R.id.layout_diesel);
 
         imageView = view.findViewById(R.id.imageView);
         imageView2 = view.findViewById(R.id.imageView2);
+        logout_btn = view.findViewById(R.id.btnLogout);
         notification_btn = view.findViewById(R.id.btn_notification);
 
         tab0 = view.findViewById(R.id.tab0);
@@ -85,22 +89,11 @@ Button btnScanQr;
         tab2 = view.findViewById(R.id.tab2);
         tab3 = view.findViewById(R.id.tab3);
 
-        layout_super.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplication(),Super_Sale_Activity.class);
-                startActivity(intent);
-            }
-        });
-
-        notification_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplication(),NotificationHere.class);
-                startActivity(intent);
-            }
-        });
-
+        layout_hi_oct.setOnClickListener(this);
+        layout_super.setOnClickListener(this);
+        layout_diesel.setOnClickListener(this);
+        notification_btn.setOnClickListener(this);
+        logout_btn.setOnClickListener(this);
 
         List<SliderItems> sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItems("Fuelly \nTotal liters", " PKR. 1000"));
@@ -213,14 +206,12 @@ Button btnScanQr;
                 .into(imageView2);
 
 
-        btnScanQr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(context, ScannerViewActivity.class));
-            }
-        });
-
-
+//        btnScanQr.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(context, ScannerViewActivity.class));
+//            }
+//        });
 
 
         // sliderApi();
@@ -364,5 +355,32 @@ Button btnScanQr;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.hi_oct_layout){
+            Intent intent = new Intent(requireActivity(),Hi_Oct_Activity.class);
+            startActivity(intent);
+        }
+        else if (v.getId() == R.id.super_layout){
+            Intent intent = new Intent(getActivity().getApplication(),Super_Sale_Activity.class);
+            startActivity(intent);
+        }
+
+        else if (v.getId() == R.id.btn_notification){
+            Intent intent = new Intent(getActivity().getApplication(),NotificationHere.class);
+            startActivity(intent);
+        }
+
+        else if (v.getId() == R.id.layout_diesel){
+            Intent intent = new Intent(getActivity().getApplication(),Diesel_Sale_Activity.class);
+            startActivity(intent);
+        }
+        else if (v.getId() == R.id.btnLogout){
+            startActivity(new Intent(getActivity().getApplication(), LoginActivity.class));
+            getActivity().onBackPressed();
+        }
+
     }
 }

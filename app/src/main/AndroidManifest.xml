@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.zasa.fuellyvendor">
+    package="com.zasa.fuellyvendor" >
 
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -15,12 +16,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".AutoLogout.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -32,7 +35,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Light"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:ignore="MissingClass"
+        tools:targetApi="31" >
+        <activity
+            android:name=".SignUpOtp"
+            android:exported="false" />
+        <activity
+            android:name=".Edit_Profile_tpin"
+            android:exported="false" />
+        <activity
+            android:name=".OTPVerification"
+            android:exported="false" />
+        <activity
+            android:name=".Diesel_Sale_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Hi_Oct_Activity"
+            android:exported="false" />
         <activity
             android:name=".ComplaintActivity"
             android:exported="false" />
@@ -66,15 +85,15 @@
         <activity
             android:name=".ProductActivity"
             android:exported="false" />
-        <activity
-            android:name=".SignUp.SignUpActivity"
-            android:exported="false" />
+         <activity
+         android:name=".SignUp.SignUpActivity"
+         android:exported="false" />
         <activity
             android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Splash.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

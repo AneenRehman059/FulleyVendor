@@ -15,11 +15,11 @@
 
     </RelativeLayout>
 
-    <!-- <ImageView
-         android:id="@+id/top"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:src="@drawable/lb_bg_top" />-->
+<!--     <ImageView-->
+<!--         android:id="@+id/top"-->
+<!--         android:layout_width="wrap_content"-->
+<!--         android:layout_height="wrap_content"-->
+<!--         android:src="@drawable/lb_bg_top" />-->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,30 +52,30 @@
                 <!--            android:layout_marginBottom="@dimen/_15sdp"-->
                 <!--            android:background="@drawable/smilelogo" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="@dimen/_30sdp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_centerInParent="true"-->
+                <!--                    android:layout_marginBottom="@dimen/_30sdp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="FUELLY"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textColor="@color/primary"
-                        android:textStyle="bold" />
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="FUELLY"-->
+                <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"-->
+                <!--                        android:textColor="@color/primary"-->
+                <!--                        android:textStyle="bold" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fuel Management Framework"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/secondary" />
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Fuel Management Framework"-->
+                <!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+                <!--                        android:textColor="@color/secondary" />-->
 
-                </LinearLayout>
+                <!--                </LinearLayout>-->
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +133,8 @@
                         android:id="@+id/etLoginPass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
+                        android:inputType="number"
+                        android:maxLength="4"
                         android:textColor="@color/black"
                         android:textColorHint="#72000000" />
 
@@ -223,13 +224,52 @@
 
         </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/btnFingerprintLock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/_4sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/ic_baseline_fingerprint_24" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:weightSum="2.3">-->
+
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="2dip"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/primary" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="0.3"-->
+<!--                android:gravity="center"-->
+<!--                android:text="or"-->
+<!--                android:textColor="@color/colorText"-->
+<!--                android:textSize="16dp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="2dip"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/primary" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/btnFingerprintLock"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_10sdp"-->
+<!--            android:elevation="@dimen/_4sdp"-->
+<!--            android:src="@drawable/ic_baseline_fingerprint_24" />-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/txt_fingerprint"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Use FingerPrint Sensor to Login"-->
+<!--            android:textColor="@color/black" />-->
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

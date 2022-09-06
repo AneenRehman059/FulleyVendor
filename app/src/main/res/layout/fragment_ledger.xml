@@ -133,10 +133,8 @@
 
     </LinearLayout>
 
-
         <include
             layout="@layout/ledger_layout_design"
-
             />
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->

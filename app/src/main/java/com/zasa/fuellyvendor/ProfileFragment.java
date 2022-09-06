@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((HomeActivity)requireActivity()).setDrawerUnlocked();
+//        ((HomeActivity)requireActivity()).setDrawerUnlocked();
 
     }
 

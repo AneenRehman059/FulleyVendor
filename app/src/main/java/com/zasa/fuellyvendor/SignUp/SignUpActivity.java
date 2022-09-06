@@ -10,7 +10,9 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.zasa.fuellyvendor.AfterSignup1;
+import com.zasa.fuellyvendor.Fragments.PumpDetailFragment;
 import com.zasa.fuellyvendor.Login.LoginActivity;
+import com.zasa.fuellyvendor.OTPVerification;
 import com.zasa.fuellyvendor.R;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
 import com.zasa.fuellyvendor.databinding.ActivitySignUpBinding;
@@ -76,7 +78,12 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        startActivity(new Intent(this, AfterSignup1.class));
+        String getMobileText = binding.signupPhone.getText().toString();
+//                String getEmailText = binding.signupPhone.getText().toString();
+        Intent intent = new Intent(SignUpActivity.this,AfterSignup1.class);
+        intent.putExtra("mobile",getMobileText);
+
+        startActivity(intent);
 //        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
@@ -85,8 +92,6 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
-
-
 
     public void closeBtn(View view) {
         startActivity(new Intent(this, LoginActivity.class));

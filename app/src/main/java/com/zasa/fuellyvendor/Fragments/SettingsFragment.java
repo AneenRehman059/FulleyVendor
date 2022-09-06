@@ -1,8 +1,11 @@
 package com.zasa.fuellyvendor.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,6 +24,7 @@ import com.zasa.fuellyvendor.R;
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     View view;
     LinearLayout change_pass,check_notification,logout;
+    SwitchCompat is_biometric;
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -33,6 +37,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
          view = inflater.inflate(R.layout.fragment_settings, container, false);
 
          getid();
+         check_biometric();
 
          check_notification.setOnClickListener(this);
          change_pass.setOnClickListener(this);
@@ -40,16 +45,42 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    private void check_biometric() {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("save", Context.MODE_PRIVATE);
+        is_biometric.setChecked(sharedPreferences.getBoolean("value", false));
+        is_biometric.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (is_biometric.isChecked()){
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("save",
+                            Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("value",true);
+                    editor.apply();
+                    is_biometric.setChecked(true);
+                }
+                else
+                {
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("save",
+                            Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("value",false);
+                    editor.apply();
+                    is_biometric.setChecked(false);
+                }
+            }
+        });
+    }
+
     private void getid() {
         change_pass = view.findViewById(R.id.reset_pass);
         check_notification = view.findViewById(R.id.notification);
         logout = view.findViewById(R.id.logout);
+        is_biometric = view.findViewById(R.id.is_biometric);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((HomeActivity)requireActivity()).setDrawerUnlocked();
+//        ((HomeActivity)requireActivity()).setDrawerUnlocked();
 
     }
 

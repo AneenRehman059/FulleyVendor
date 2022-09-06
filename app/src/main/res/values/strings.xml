@@ -20,4 +20,13 @@
     <string name="fuel_up_led2022_sabroso_private_ltd_n_at_pso_fateh_garh">Fuel up LED2022, Sabroso Private Ltd \n at PSO Fateh Garh</string>
     <string name="rs_20_0000">Rs 20,0000</string>
     <string name="ltr_20">Ltr 20</string>
+    <string name="title_activity_first_sign_up_otp">First_SignUp_Otp</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

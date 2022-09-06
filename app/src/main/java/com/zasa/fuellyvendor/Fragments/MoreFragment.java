@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.zasa.fuellyvendor.ComplaintActivity;
+import com.zasa.fuellyvendor.Edit_Profile_tpin;
 import com.zasa.fuellyvendor.HomeActivity;
 import com.zasa.fuellyvendor.R;
 import com.zasa.fuellyvendor.ViewProfile;
@@ -67,7 +68,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((HomeActivity)requireActivity()).setDrawerUnlocked();
+//        ((HomeActivity)requireActivity()).setDrawerUnlocked();
 
     }
 
@@ -93,7 +94,7 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         }
 
         else if (v.getId() == R.id.btn_view_prof){
-            Intent intent = new Intent(getActivity().getApplication(), ViewProfile.class);
+            Intent intent = new Intent(getActivity().getApplication(), Edit_Profile_tpin.class);
             startActivity(intent);
         }
 
