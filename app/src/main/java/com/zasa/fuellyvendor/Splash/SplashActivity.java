@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -25,14 +26,18 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
-import com.zasa.fuellyvendor.AfterSignup1;
+import com.zasa.fuellyvendor.Retrofit.ApiClient;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.OTPVerification;
 import com.zasa.fuellyvendor.R;
-import com.zasa.fuellyvendor.SignUp.SignUpActivity;
+import com.zasa.fuellyvendor.Request.App_Detail_Request;
 import com.zasa.fuellyvendor.SignUpOtp;
 import com.zasa.fuellyvendor.Utils.Internet;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -46,6 +51,7 @@ public class SplashActivity extends AppCompatActivity {
     ProgressBar progressBar;
     SharedPrefManager sharedPrefManager;
     boolean isHandlerRun = true;
+    TextView solo;
 
 
     @Override
@@ -64,6 +70,25 @@ public class SplashActivity extends AppCompatActivity {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_splash);
+
+            solo = findViewById(R.id.solo);
+
+        Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
+        call.enqueue(new Callback<App_Detail_Request>() {
+            @Override
+            public void onResponse(Call<App_Detail_Request> call, Response<App_Detail_Request> response) {
+                App_Detail_Request app_detail_request = response.body();
+                if (response.isSuccessful()){
+                    String solod  = app_detail_request.getApp_Details().getAppSolo();
+                    solo.setText(solod);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<App_Detail_Request> call, Throwable t) {
+                Toast.makeText(context, "Failed" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

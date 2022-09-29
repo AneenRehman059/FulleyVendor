@@ -3,8 +3,6 @@ package com.zasa.fuellyvendor.Login;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.zasa.fuellyvendor.Constants;
-
 public class Utilities {
 
     private final static String STRING_PREFERENCES = "StringPreferences";

@@ -17,6 +17,7 @@
     <color name="primaryLight">#d0eee2</color>
     <color name="bulish">#6392eb</color>
     <color name="secondary">#fbc482</color>
+    <color name="transparent">#00000000</color>
     <color name="bgColorr">#0F3F51B5</color>
     <color name="bgColor">#f6fbf7</color>
     <color name="gray">#86000000</color>
@@ -29,5 +30,6 @@
     <color name="op_primary">#903B53AB</color>
     <color name="half_white">#F2F2F4</color>
     <color name="DarkGray">#C8C9CC</color>
-
+    <color name="button_grey">#EAEBED</color>
+    <color name="color_light_blue">#98BEFF</color>
 </resources>

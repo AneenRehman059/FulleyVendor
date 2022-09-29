@@ -37,6 +37,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="MissingClass"
         tools:targetApi="31" >
+        <activity android:name=".AdsActivity"
+            android:exported="false"/>
         <activity
             android:name=".SignUpOtp"
             android:exported="false" />

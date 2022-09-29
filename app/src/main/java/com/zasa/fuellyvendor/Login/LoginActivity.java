@@ -1,36 +1,25 @@
 package com.zasa.fuellyvendor.Login;
 
-import static com.zasa.fuellyvendor.Constants.FINGER_PRINT_PREFS;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.zasa.fuellyvendor.AfterSignup1;
-import com.zasa.fuellyvendor.Fragments.PumpDetailFragment;
+import com.zasa.fuellyvendor.Alerts;
 import com.zasa.fuellyvendor.HomeActivity;
-import com.zasa.fuellyvendor.HomeFragment;
 import com.zasa.fuellyvendor.R;
-import com.zasa.fuellyvendor.SignUp.SignUpActivity;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
 import com.zasa.fuellyvendor.databinding.ActivityLoginBinding;
-
-import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +27,7 @@ public static String PREFS_NAME="MyPrefsFile";
 
     ActivityLoginBinding binding;
 
+    private Dialog AnimatedDialog;
     ProgressDialog progressDialog;
     SharedPrefManager sharedPrefManager;
     Context context;
@@ -60,7 +50,10 @@ public static String PREFS_NAME="MyPrefsFile";
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setMessage("Please Wait...");
 
+        AnimatedDialog = Alerts.showAnimatedLoadingIndicator(context);
+
         SharedPreferences sp_RememberMe = getSharedPreferences("RememberMe", MODE_PRIVATE);
+
         String phone = sp_RememberMe.getString("uPhone", "");
         String pass = sp_RememberMe.getString("uPass", "");
         if (!phone.isEmpty() && !pass.isEmpty()) {
@@ -78,7 +71,6 @@ public static String PREFS_NAME="MyPrefsFile";
 //        });
 
 
-
     }
 
     public void forgetPassword(View view) {
@@ -91,6 +83,7 @@ public static String PREFS_NAME="MyPrefsFile";
 
     public void LoginBtn(View view) {
 
+        AnimatedDialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -101,7 +94,6 @@ public static String PREFS_NAME="MyPrefsFile";
 
         String st_Username = binding.etLoginUsername.getText().toString().trim();
         String st_pass = binding.etLoginPass.getText().toString().trim();
-
 
 //        if (st_Username.length() != 11) {
 //            et_Phone.requestFocus();
