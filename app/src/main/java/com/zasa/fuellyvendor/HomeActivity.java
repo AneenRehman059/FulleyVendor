@@ -262,5 +262,8 @@ public class HomeActivity extends BaseActivity  {
 //    }
 
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }

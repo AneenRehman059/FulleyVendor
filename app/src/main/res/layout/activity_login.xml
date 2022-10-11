@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Username"
+                    android:hint="Mobile Number"
                     app:boxBackgroundColor="@color/primaryLight"
                     app:boxCornerRadiusBottomEnd="6dp"
                     app:boxCornerRadiusBottomStart="6dp"
@@ -102,7 +102,7 @@
                         android:id="@+id/etLoginUsername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:textColor="@color/black"
                         android:textColorHint="#72000000" />
                     android:maxLength="11"

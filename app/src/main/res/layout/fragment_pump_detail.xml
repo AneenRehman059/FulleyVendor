@@ -71,27 +71,21 @@
             android:textColorHint="#72000000"
             app:boxStrokeColor="@color/black"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OMC Company"
-            android:textColor="@color/colorText"
-            android:layout_marginTop="15dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1.4"
             android:background="@drawable/rectangel_shape"
             android:drawSelectorOnTop="true">
-            <Spinner
+
+            <TextView
+                android:id="@+id/select_omc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:entries="@array/companies_array"
-                android:paddingLeft="5dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:spinnerMode="dialog"/>
+                android:spinnerMode="dialog" />
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

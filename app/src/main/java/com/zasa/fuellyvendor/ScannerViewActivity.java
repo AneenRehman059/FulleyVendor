@@ -4,16 +4,13 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.Result;
@@ -23,6 +20,9 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.zasa.fuellyvendor.Retrofit.ApiClient;
+import com.zasa.fuellyvendor.models.getFuelUp;
+import com.zasa.fuellyvendor.models.getQrData_Model;
 
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -70,6 +70,45 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
         // TextLay.setEllipsize(TextUtils.TruncateAt.MARQUEE);
 
         requestForCameraPermission();
+
+    }
+
+    private void getQrData() {
+        String s = getIntent().getStringExtra("code");
+
+        Call<getQrData_Model.QR_Details> call = ApiClient.getApiService().getQRData(1,s);
+        call.enqueue(new Callback<getQrData_Model.QR_Details>() {
+            @Override
+            public void onResponse(Call<getQrData_Model.QR_Details> call, Response<getQrData_Model.QR_Details> response) {
+                getQrData_Model.QR_Details getQrDataModel = response.body();
+                assert getQrDataModel != null;
+                if (getQrDataModel.getQR_Type() == 2){
+                    if (getQrDataModel.getFix_Pump_Code() != null){
+                        if (getQrDataModel.getFix_Pump_Code().equals(getQrDataModel.getPump_Code())){
+                            Intent intent = new Intent(ScannerViewActivity.this,Check_Fuel_LimitActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(ScannerViewActivity.this, "Not allowed to fuel up thid pump", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Intent intent = new Intent(ScannerViewActivity.this,Check_Fuel_LimitActivity.class);
+                        startActivity(intent);
+                    }
+                }
+                else {
+                    Intent intent = new Intent(ScannerViewActivity.this,Check_Fuel_LimitActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<getQrData_Model.QR_Details> call, Throwable t) {
+                Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -78,20 +117,12 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
 
         //scanned item code
         String Code = rawResult.getText();
-        // Material_Code = Code.toUpperCase();
 
-
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                zXingScannerView.resumeCameraPreview(ScannerViewActivity.this);
-//            }
-//        }, 2000);
         Toast.makeText(context, ""+Code, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context, FuelQrCodeActivity.class);
+        Intent intent = new Intent(context, Check_Fuel_LimitActivity.class);
         intent.putExtra("code", Code);
         startActivity(intent);
+        getQrData();
        finish();
 
     }

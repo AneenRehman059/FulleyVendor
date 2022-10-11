@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         else if (getApiList.get(i).getPro_code()==4){
                             tv_cng.setText(getApiList.get(i).getPro_title());
                         }
-                        Toast.makeText(context, ""+getApiList.get(i).getPro_title(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, ""+getApiList.get(i).getPro_title(), Toast.LENGTH_SHORT).show();
                     }
 
                 }

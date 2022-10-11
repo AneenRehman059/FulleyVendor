@@ -11,6 +11,10 @@
         <item>Parco</item>
     </string-array>
 
+    <string-array name="omc_arrays">
+        <item>Select OMC</item>
+    </string-array>
+
     <string-array name="fuel_type">
         <item>Petrol</item>
         <item>Hi-Oct</item>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.zasa.fuellyvendor" >
+    package="com.zasa.fuellyvendor">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -36,9 +36,16 @@
         android:theme="@style/Theme.Light"
         android:usesCleartextTraffic="true"
         tools:ignore="MissingClass"
-        tools:targetApi="31" >
-        <activity android:name=".AdsActivity"
-            android:exported="false"/>
+        tools:targetApi="31">
+        <activity
+            android:name=".Check_Fuel_LimitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdsActivity"
+            android:exported="false" />
         <activity
             android:name=".SignUpOtp"
             android:exported="false" />
@@ -87,15 +94,15 @@
         <activity
             android:name=".ProductActivity"
             android:exported="false" />
-         <activity
-         android:name=".SignUp.SignUpActivity"
-         android:exported="false" />
+        <activity
+            android:name=".SignUp.SignUpActivity"
+            android:exported="false" />
         <activity
             android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".Splash.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
