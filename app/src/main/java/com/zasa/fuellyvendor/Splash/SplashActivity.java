@@ -195,7 +195,7 @@ public class SplashActivity extends AppCompatActivity {
                         boolean hasSignedUp = sharedPreferences.getBoolean("hasSignedUp",false);
 
                         if (hasLoggedIn){
-                            Intent intent = new Intent(SplashActivity.this, OTPVerification.class);
+                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -203,7 +203,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         else {
                             progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                            Intent intent = new Intent(SplashActivity.this,OTPVerification.class);
                             startActivity(intent);
                             finish();
                         }

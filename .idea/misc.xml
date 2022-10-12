@@ -16,6 +16,8 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/edit_box.xml" value="0.137" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/flash_off.xml" value="0.186" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/flash_on.xml" value="0.1375" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/drawable/gradient_bg_style.xml" value="0.2075" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/drawable/gradient_bg_style1.xml" value="0.137" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_arrow_back.xml" value="0.147" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_arrow_back_white.xml" value="0.147" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_arrow_forward_secondary.xml" value="0.147" />
@@ -58,7 +60,7 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.29839883551673946" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/flag_dialog.xml" value="0.19537037037037036" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_extra_services.xml" value="0.20416666666666666" />
-        <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_ledger.xml" value="0.2" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_lubricant_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_more.xml" value="0.20416666666666666" />
@@ -68,6 +70,7 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_pump_detail.xml" value="0.22" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_settings.xml" value="0.22" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/ledger_layout_design.xml" value="0.25" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/nav_drawer_header.xml" value="0.16" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/new_spinner_item.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/news_slider_layout_item.xml" value="0.19537037037037036" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/omc_dropdown_item.xml" value="0.20416666666666666" />

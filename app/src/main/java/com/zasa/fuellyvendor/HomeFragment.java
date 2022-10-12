@@ -63,12 +63,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     ImageView imageView, imageView2, notification_btn, logout_btn;
 
-    ImageSlider imageSlider;
-    List<SlideModel> list = new ArrayList<>();//default list
-    List<SliderApiModel> sliderApiModelList = new ArrayList<>();  //custom list
-
-    Button btnScanQr;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -144,8 +144,8 @@
                             android:layout_height="@dimen/_170sdp"
                             android:elevation="@dimen/_10sdp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/banner" />
-
+                            app:srcCompat="@drawable/banner"
+                           />
 
                     </LinearLayout>
 
@@ -219,6 +219,7 @@
                             <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:background="@drawable/gradient_bg_style1"
                                 android:orientation="vertical">
 
                                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -319,6 +320,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_1sdp"
+                                    android:gravity="center"
                                     android:orientation="horizontal"
                                     android:weightSum="3"
                                     app:cardPreventCornerOverlap="true">
