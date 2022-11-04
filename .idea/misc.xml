@@ -44,17 +44,19 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_complaint.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_fuel_qr_code.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_home.xml" value="0.18" />
-        <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_notification_here.xml" value="0.15" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_otpverification.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_scanner_view.xml" value="0.1" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_sign_up2.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_sign_up_next.xml" value="0.25" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_sign_up_otp.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_success.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_super_sale.xml" value="0.25" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/activity_view_profile.xml" value="0.18" />
-        <entry key="..\:/FuellyVendor/app/src/main/res/layout/content_home.xml" value="0.1" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/content_home.xml" value="0.18" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/cstm_notification.xml" value="0.25" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/custom_dialog_progress.xml" value="0.19537037037037036" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.29839883551673946" />

@@ -8,10 +8,8 @@ import android.widget.ImageView;
 
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 import com.zasa.fuellyvendor.R;
-import com.zasa.fuellyvendor.Response.App_Detail_Respone_Model;
-import com.zasa.fuellyvendor.RoundedCornersTransformation;
+import com.zasa.fuellyvendor.models.App_Detail_Respone_Model;
 
 import java.util.ArrayList;
 

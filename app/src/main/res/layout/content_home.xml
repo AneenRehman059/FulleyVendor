@@ -22,14 +22,15 @@
                 android:id="@+id/fragmentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="?attr/actionBarSize" />
+
+                />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/btnFuelly"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/cirular_style"
@@ -37,20 +38,23 @@
             android:gravity="center"
             android:text="Scan Qr"
             android:textColor="@color/white"
-            android:textSize="@dimen/_14sdp" />
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginBottom="20dp"
+          />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:cardCornerRadius="5dp"
-            app:cardUseCompatPadding="true">app:cardBackgroundColor="@color/primaryLight"
+            >app:cardBackgroundColor="@color/primaryLight"
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:layout_gravity="center"
                app:menu="@menu/bottom_nav_menu"
                 />

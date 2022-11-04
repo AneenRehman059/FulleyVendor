@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mattprecious.swirl.SwirlView;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.Splash.SplashActivity;
 
@@ -51,7 +52,6 @@ public class OTPVerification extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
 
-
         // getting email and mobile from Register activity through intent
 //        final String getEmail = getIntent().getStringExtra("email");
         final String getMobile = getIntent().getStringExtra("mobile");
@@ -61,8 +61,7 @@ public class OTPVerification extends AppCompatActivity implements View.OnClickLi
         otpMobile.setText(getMobile);
 
         initView();
-        biometric();
-
+//        biometric();
 
         OTPEt1.addTextChangedListener(textWatcher);
         OTPEt2.addTextChangedListener(textWatcher);
@@ -70,17 +69,17 @@ public class OTPVerification extends AppCompatActivity implements View.OnClickLi
         OTPEt4.addTextChangedListener(textWatcher);
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences(OTPVerification.PREFS_NAME,0);
-        boolean Is_checked = sharedPreferences.getBoolean("value",true);
-        if (Is_checked){
-            ib_fingerlogin.setVisibility(View.VISIBLE);
-            Or.setVisibility(View.VISIBLE);
-
-        }
-        else {
-            ib_fingerlogin.setVisibility(View.GONE);
-            Or.setVisibility(View.GONE);
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences(OTPVerification.PREFS_NAME,0);
+//        boolean Is_checked = sharedPreferences.getBoolean("value",true);
+//        if (Is_checked){
+//            ib_fingerlogin.setVisibility(View.VISIBLE);
+//            Or.setVisibility(View.VISIBLE);
+//
+//        }
+//        else {
+//            ib_fingerlogin.setVisibility(View.GONE);
+//            Or.setVisibility(View.GONE);
+//        }
 
         showKeyboard(OTPEt1);
 
@@ -93,74 +92,74 @@ public class OTPVerification extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    private void biometric() {
-
-        // BIOMETRIC FINGERPRINT
-        BiometricManager biometricManager = BiometricManager.from(this);
-        switch (biometricManager.canAuthenticate()) {
-
-            // this means we can use biometric sensor
-            case BiometricManager.BIOMETRIC_SUCCESS:
-                msgtex.setText("You can use the fingerprint sensor to login");
-                msgtex.setTextColor(Color.parseColor("#fafafa"));
-                break;
-
-            // this means that the device doesn't have fingerprint sensor
-            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
-                msgtex.setText("This device doesnot have a fingerprint sensor");
-                ib_fingerlogin.setVisibility(View.GONE);
-                break;
-
-            // this means that biometric sensor is not available
-            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
-                msgtex.setText("The biometric sensor is currently unavailable");
-                ib_fingerlogin.setVisibility(View.GONE);
-                break;
-
-            // this means that the device doesn't contain your fingerprint
-            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-                msgtex.setText("Your device doesn't have fingerprint saved,please check your security settings");
-                ib_fingerlogin.setVisibility(View.GONE);
-                break;
-        }
-
-
-        Executor executor = ContextCompat.getMainExecutor(this);
-        // this will give us result of AUTHENTICATION
-        final BiometricPrompt biometricPrompt = new BiometricPrompt(OTPVerification.this, executor, new BiometricPrompt.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-            }
-
-            // THIS METHOD IS CALLED WHEN AUTHENTICATION IS SUCCESS
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                msgtex.setText("Login Successful");
-                Intent intent = new Intent(OTPVerification.this,HomeActivity.class);
-                startActivity(intent);
-            }
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-            }
-        });
-
-        // creating a variable for our promptInfo
-        // BIOMETRIC DIALOG
-        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle(getResources().getString(R.string.app_name))
-                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
-        ib_fingerlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                biometricPrompt.authenticate(promptInfo);
-
-            }
-        });
-    }
+//    private void biometric() {
+//
+//        // BIOMETRIC FINGERPRINT
+//        BiometricManager biometricManager = BiometricManager.from(this);
+//        switch (biometricManager.canAuthenticate()) {
+//
+//            // this means we can use biometric sensor
+//            case BiometricManager.BIOMETRIC_SUCCESS:
+//                msgtex.setText("You can use the fingerprint sensor to login");
+//                msgtex.setTextColor(Color.parseColor("#fafafa"));
+//                break;
+//
+//            // this means that the device doesn't have fingerprint sensor
+//            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+//                msgtex.setText("This device doesnot have a fingerprint sensor");
+//                ib_fingerlogin.setVisibility(View.GONE);
+//                break;
+//
+//            // this means that biometric sensor is not available
+//            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+//                msgtex.setText("The biometric sensor is currently unavailable");
+//                ib_fingerlogin.setVisibility(View.GONE);
+//                break;
+//
+//            // this means that the device doesn't contain your fingerprint
+//            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+//                msgtex.setText("Your device doesn't have fingerprint saved,please check your security settings");
+//                ib_fingerlogin.setVisibility(View.GONE);
+//                break;
+//        }
+//
+//
+//        Executor executor = ContextCompat.getMainExecutor(this);
+//        // this will give us result of AUTHENTICATION
+//        final BiometricPrompt biometricPrompt = new BiometricPrompt(OTPVerification.this, executor, new BiometricPrompt.AuthenticationCallback() {
+//            @Override
+//            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+//                super.onAuthenticationError(errorCode, errString);
+//            }
+//
+//            // THIS METHOD IS CALLED WHEN AUTHENTICATION IS SUCCESS
+//            @Override
+//            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+//                super.onAuthenticationSucceeded(result);
+//                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+//                msgtex.setText("Login Successful");
+//                Intent intent = new Intent(OTPVerification.this,HomeActivity.class);
+//                startActivity(intent);
+//            }
+//            @Override
+//            public void onAuthenticationFailed() {
+//                super.onAuthenticationFailed();
+//            }
+//        });
+//
+//        // creating a variable for our promptInfo
+//        // BIOMETRIC DIALOG
+//        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+//                .setTitle(getResources().getString(R.string.app_name))
+//                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
+//        ib_fingerlogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                biometricPrompt.authenticate(promptInfo);
+//
+//            }
+//        });
+//    }
 
     private void initView() {
         ib_fingerlogin = findViewById(R.id.btnFingerprintLock);

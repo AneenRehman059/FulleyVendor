@@ -1,7 +1,7 @@
 package com.zasa.fuellyvendor.Request;
 
 import com.google.gson.annotations.SerializedName;
-import com.zasa.fuellyvendor.Response.Product_Wise_Request_Model;
+import com.zasa.fuellyvendor.models.Product_Wise_Request_Model;
 
 import java.util.ArrayList;
 

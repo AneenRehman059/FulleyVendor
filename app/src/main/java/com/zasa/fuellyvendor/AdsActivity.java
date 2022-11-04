@@ -12,7 +12,7 @@
 //import androidx.appcompat.app.AppCompatActivity;
 //
 //import com.squareup.picasso.Picasso;
-//import com.zasa.fuellyvendor.Request.App_Detail_Request;
+//import com.zasa.fuellyvendor.models.App_Detail_Request;
 //
 //import retrofit2.Call;
 //import retrofit2.Callback;

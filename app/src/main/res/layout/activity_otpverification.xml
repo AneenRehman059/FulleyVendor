@@ -236,20 +236,22 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/btnFingerprintLock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:elevation="@dimen/_4sdp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_baseline_fingerprint_24" />
-    <TextView
-        android:id="@+id/txt_fingerprint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Use FingerPrint Sensor to Login"
-        android:textColor="@color/black" />
+<!--    <ImageView-->
+<!--        android:id="@+id/btnFingerprintLock"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:elevation="@dimen/_4sdp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:src="@drawable/ic_baseline_fingerprint_24" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt_fingerprint"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="Use FingerPrint Sensor to Login"-->
+<!--        android:textColor="@color/black" />-->
 
 </LinearLayout>

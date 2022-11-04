@@ -48,7 +48,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            android:src="@drawable/banner"
+
             app:shapeAppearanceOverlay="@style/roundimageview"/>
 
         <LinearLayout

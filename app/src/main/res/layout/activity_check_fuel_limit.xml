@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F7F7FC"
     android:orientation="vertical"
     tools:context=".Check_Fuel_LimitActivity">
 
@@ -38,78 +39,135 @@
             android:scaleType="fitCenter"
             app:tint="@color/white" />
     </RelativeLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginTop="90dp"
-    android:layout_gravity="center">
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="@dimen/_170sdp"-->
+    <!--        android:layout_height="@dimen/_170sdp"-->
+    <!--        android:id="@+id/successImg"-->
+    <!--        android:src="@drawable/success"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="@dimen/_20sdp"-->
+    <!--        />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/fleetCode"-->
+    <!--        android:text=""-->
+    <!--        android:textSize="20dp"-->
+    <!--        android:fontFamily="@font/gilroy_bold"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="30dp"/>-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:id="@+id/qrId"-->
+    <!--        android:text=""-->
+    <!--        android:fontFamily="@font/gilroy_bold"-->
+    <!--        android:textSize="20dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_marginTop="30dp"/>-->
+    <!--    -->
+    <!--    <Button-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="OK"-->
+    <!--        android:id="@+id/btnOk"-->
+    <!--        android:paddingLeft="@dimen/_50sdp"-->
+    <!--        android:paddingRight="@dimen/_50sdp"/>-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/fpaimation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:lottie_colorFilter="@color/gray"
+        android:scaleType="fitCenter"
+        app:lottie_rawRes="@raw/confirmedtick" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vehicle Number"
-        android:textColor="@color/colorText"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        style="@style/style_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-
-        android:inputType="text"
-        android:textColor="@color/black"
-        android:textColorHint="#72000000"
-        app:boxStrokeColor="@color/black"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fuel_up Ltr"
-        android:textColor="@color/colorText"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        style="@style/style_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-
-        android:inputType="text"
-        android:textColor="@color/black"
-        android:textColorHint="#72000000"
-        app:boxStrokeColor="@color/black"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Fuel"
-        android:textColor="@color/colorText"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        style="@style/style_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/enter_fuel"
-        android:layout_marginTop="10dp"
-        android:hint="Enter the Fuel"
-        android:inputType="number"
-        android:textColor="@color/black"
-        android:textColorHint="#72000000"
-        app:boxStrokeColor="@color/black"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:id="@+id/btn_disburst"
-        android:textAllCaps="false"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
+        android:text="Fuellup Seccessfuly"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/secondary"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/gilroy_bold"
         />
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Vehicle Number : "
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="16dp"
+            android:textColor="@color/colorText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/fleetCode"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Fuel (Ltr) :"
+                android:fontFamily="@font/gilroy_bold"
+                android:textSize="16dp"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/fuelLtr"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_disburst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:text="Submit"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 </LinearLayout>

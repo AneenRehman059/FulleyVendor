@@ -1,15 +1,26 @@
 package com.zasa.fuellyvendor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
+import android.provider.Settings;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.zasa.fuellyvendor.Retrofit.ApiClient;
+import com.zasa.fuellyvendor.models.GetQrData_Model;
 import com.zasa.fuellyvendor.models.getFuelUp;
 
 import retrofit2.Call;
@@ -20,6 +31,12 @@ public class Check_Fuel_LimitActivity extends AppCompatActivity {
     Button disburst;
     EditText enterFuel;
     double e_fuel;
+    TextView loca, fleetCode,fuel_ltr;
+    String latitude;
+    String longitude;
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION = 1;
+    LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,33 +44,35 @@ public class Check_Fuel_LimitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_fuel_limit);
 
         disburst = findViewById(R.id.btn_disburst);
-        enterFuel = findViewById(R.id.enter_fuel);
+//        enterFuel = findViewById(R.id.enter_fuel);
+        fleetCode = findViewById(R.id.fleetCode);
+        fuel_ltr = findViewById(R.id.fuelLtr);
+        lottieAnimationView = findViewById(R.id.fpaimation);
+        lottieAnimationView.playAnimation();
+        lottieAnimationView.setSpeed(1);
 
         String s = getIntent().getStringExtra("code");
+//        fleetCode.setText(s.split("U")[1]);
 
-
-        disburst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String enter_fuel = enterFuel.getText().toString();
-                e_fuel = Double.parseDouble(enter_fuel);
-                Call<getFuelUp> call = ApiClient.getApiService().getQrFuelup(s, "", e_fuel, "", "", "Test Location for entry or APIs testing");
-                call.enqueue(new Callback<getFuelUp>() {
-                    @Override
-                    public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
-                        if (response.isSuccessful()) {
-                            Intent intent = new Intent(Check_Fuel_LimitActivity.this, HomeActivity.class);
-                            Toast.makeText(Check_Fuel_LimitActivity.this, "Fuell refill successfuly", Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<getFuelUp> call, Throwable t) {
-                        Toast.makeText(Check_Fuel_LimitActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+//        Call<GetQrData_Model> modelCall = ApiClient.getApiService().getQRData(1,s);
+//        modelCall.enqueue(new Callback<GetQrData_Model>() {
+//            @Override
+//            public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
+//                GetQrData_Model qrDetail = response.body();
+//
+//                if (response.isSuccessful()){
+//                    fuel_ltr.setText(qrDetail.getQR_Details().getMember_FName());
+//                }
+//                else {
+//                    Toast.makeText(Check_Fuel_LimitActivity.this, "No Fuel Up", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GetQrData_Model> call, Throwable t) {
+//                Toast.makeText(Check_Fuel_LimitActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
+
 }

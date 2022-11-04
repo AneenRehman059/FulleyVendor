@@ -20,19 +20,19 @@ public class SignUpOtp extends AppCompatActivity {
 
         after_sign_up = findViewById(R.id.verifyOtpBtn_signup);
 
-        after_sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SharedPreferences sharedPreferences = getSharedPreferences(SignUpOtp.PREFS_NAME,0);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                editor.putBoolean("hasSignedUp",true);
-                editor.commit();
-                startActivity(new Intent(SignUpOtp.this, SignUpActivity.class));
-                finish();
-
-            }
-        });
+//        after_sign_up.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SharedPreferences sharedPreferences = getSharedPreferences(SignUpOtp.PREFS_NAME,0);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//                editor.putBoolean("hasSignedUp",false);
+//                editor.commit();
+//                startActivity(new Intent(SignUpOtp.this, SignUpActivity.class));
+//                finish();
+//
+//            }
+//        });
     }
 }

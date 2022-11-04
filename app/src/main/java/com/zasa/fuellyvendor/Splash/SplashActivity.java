@@ -30,7 +30,8 @@ import com.zasa.fuellyvendor.Retrofit.ApiClient;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.OTPVerification;
 import com.zasa.fuellyvendor.R;
-import com.zasa.fuellyvendor.Request.App_Detail_Request;
+import com.zasa.fuellyvendor.SignUp.SignUpActivity;
+import com.zasa.fuellyvendor.models.App_Detail_Request;
 import com.zasa.fuellyvendor.SignUpOtp;
 import com.zasa.fuellyvendor.Utils.Internet;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
@@ -41,7 +42,7 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    public static String PREFS_NAME="MyPrefsFile";
+//    public static String PREFS_NAME="MyPrefsFile";
 
     AppUpdateManager appUpdateManager;
     public static final int RC_APP_UPDATEE = 104;
@@ -71,7 +72,8 @@ public class SplashActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_splash);
 
-            solo = findViewById(R.id.solo);
+            solo = findViewById(R.id.sologen);
+
 
         Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
         call.enqueue(new Callback<App_Detail_Request>() {
@@ -190,12 +192,12 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(SplashActivity.PREFS_NAME,0);
+                        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
                         boolean hasLoggedIn = sharedPreferences.getBoolean("hasLoggedIn",false);
-                        boolean hasSignedUp = sharedPreferences.getBoolean("hasSignedUp",false);
+                        boolean hasSignedUp = sharedPreferences.getBoolean("hasSignedUp",true);
 
                         if (hasLoggedIn){
-                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, OTPVerification.class);
                             startActivity(intent);
                             finish();
                         }
@@ -203,23 +205,23 @@ public class SplashActivity extends AppCompatActivity {
 
                         else {
                             progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(SplashActivity.this,OTPVerification.class);
+                            Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }
 
-                        if (hasSignedUp){
-                            Intent intent = new Intent(SplashActivity.this, OTPVerification.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                        else
-                        {
-                            Intent intent = new Intent(SplashActivity.this, SignUpOtp.class);
-                            startActivity(intent);
-                            finish();
-                        }
+//                        if (hasSignedUp){
+//                            Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//
+//                        else
+//                        {
+//                            Intent intent = new Intent(SplashActivity.this, SignUpOtp.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
 
 
 //                        progressBar.setVisibility(View.GONE);

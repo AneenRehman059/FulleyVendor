@@ -27,7 +27,7 @@ import com.zasa.fuellyvendor.AutoLogout.BaseActivity;
 import com.zasa.fuellyvendor.Fragments.LedgerFragment;
 import com.zasa.fuellyvendor.Fragments.MoreFragment;
 import com.zasa.fuellyvendor.Fragments.SettingsFragment;
-import com.zasa.fuellyvendor.Request.App_Detail_Request;
+import com.zasa.fuellyvendor.models.App_Detail_Request;
 import com.zasa.fuellyvendor.Retrofit.ApiClient;
 import com.zasa.fuellyvendor.databinding.ActivityHomeBinding;
 

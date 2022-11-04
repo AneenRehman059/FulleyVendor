@@ -1,5 +1,7 @@
 package com.zasa.fuellyvendor.Retrofit;
 
+import static com.zasa.fuellyvendor.Retrofit.Constants.BASE_URL;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zasa.fuellyvendor.ApiInterface;
@@ -30,7 +32,7 @@ public class ApiClient {
 
         retrofit = new Retrofit.Builder()
 
-                .baseUrl("http://fuellyapi.loyaltybunch.com/api/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create()) //important
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)

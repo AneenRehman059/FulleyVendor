@@ -1,7 +1,9 @@
 package com.zasa.fuellyvendor.Retrofit;
 
-public interface Constants {
+public class Constants {
 
     String FINGER_PRINT_PREFS = "is_finger_print";
+
+    public static String BASE_URL = "http://fuellyapi.loyaltybunch.com/api/";
 
 }

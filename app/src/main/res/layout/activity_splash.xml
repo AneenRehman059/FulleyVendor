@@ -31,11 +31,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:id="@+id/solo"
+            android:id="@+id/sologen"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/primary"
             android:textStyle="bold" />
+
 
 <!--        <TextView-->
 <!--            android:layout_width="wrap_content"-->

@@ -14,27 +14,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.zasa.fuellyvendor.Adapters.MainSliderImageAdapter;
 import com.zasa.fuellyvendor.Login.LoginActivity;
-import com.zasa.fuellyvendor.Request.App_Detail_Request;
+import com.zasa.fuellyvendor.models.App_Detail_Request;
 import com.zasa.fuellyvendor.Request.Product_Wise_Request;
-import com.zasa.fuellyvendor.Response.App_Detail_Respone_Model;
-import com.zasa.fuellyvendor.Response.Product_Wise_Request_Model;
+import com.zasa.fuellyvendor.models.App_Detail_Respone_Model;
+import com.zasa.fuellyvendor.models.Product_Wise_Request_Model;
 import com.zasa.fuellyvendor.Retrofit.ApiClient;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
 import com.zasa.fuellyvendor.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,7 +52,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Context context;
     int get_super;
     String get_super_title;
-    TextView tv_super,tv_hi_oct, tv_diesel,tv_cng;
+    TextView tv_super, tv_hi_oct, tv_diesel, tv_cng;
     ArrayList<App_Detail_Respone_Model.SliderApiModel> sliderApiModelArrayList = new ArrayList<>();
     ArrayList<Product_Wise_Request_Model> getApiList;
 
@@ -78,7 +74,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 //        btnScanQr = view.findViewById(R.id.btnScanQr);
 
-        getApiList = new ArrayList<com.zasa.fuellyvendor.Response.Product_Wise_Request_Model>();
+        getApiList = new ArrayList<Product_Wise_Request_Model>();
         sliderView = view.findViewById(R.id.imageSlider);
         layout_super = view.findViewById(R.id.super_layout);
         layout_hi_oct = view.findViewById(R.id.hi_oct_layout);
@@ -110,21 +106,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<Product_Wise_Request> call, Response<Product_Wise_Request> response) {
                 Product_Wise_Request call_api = response.body();
-                if (response.isSuccessful()){
-                    getApiList =response.body().getProduct_List();
-                    for (int i = 0;i<getApiList.size();i++){
 
-                        if (getApiList.get(i).getPro_code()==1){
+                if (response.isSuccessful()) {
+                    getApiList = response.body().getProduct_List();
+                    for (int i = 0; i < getApiList.size(); i++) {
+
+                        if (getApiList.get(i).getPro_code() == 1) {
                             tv_super.setText(getApiList.get(i).getPro_title());
-                        }
-
-                     else if (getApiList.get(i).getPro_code()==2){
+                        } else if (getApiList.get(i).getPro_code() == 2) {
                             tv_hi_oct.setText(getApiList.get(i).getPro_title());
-                        }
-                       else if (getApiList.get(i).getPro_code()==3){
+                        } else if (getApiList.get(i).getPro_code() == 3) {
                             tv_diesel.setText(getApiList.get(i).getPro_title());
-                        }
-                        else if (getApiList.get(i).getPro_code()==4){
+                        } else if (getApiList.get(i).getPro_code() == 4) {
                             tv_cng.setText(getApiList.get(i).getPro_title());
                         }
 //                        Toast.makeText(context, ""+getApiList.get(i).getPro_title(), Toast.LENGTH_SHORT).show();
@@ -142,7 +135,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     public void ImageSliderAdapter() {
-        Call<com.zasa.fuellyvendor.Request.App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
+        Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
         call.enqueue(new Callback<App_Detail_Request>() {
             @Override
             public void onResponse(@NonNull Call<App_Detail_Request> call, @NonNull Response<App_Detail_Request> response) {

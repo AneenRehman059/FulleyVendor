@@ -1,14 +1,16 @@
 package com.zasa.fuellyvendor.models;
 
-public class getQrData_Model {
+public class GetQrData_Model {
     private String id;
-    private int Status;
+    private String Status;
     private String Message;
+    public QR_Detail_Model QR_Details;
 
-    public getQrData_Model(String id, int status, String message) {
+    public GetQrData_Model(String id, String status, String message, QR_Detail_Model QR_Details) {
         this.id = id;
         Status = status;
         Message = message;
+        this.QR_Details = QR_Details;
     }
 
     public String getId() {
@@ -19,11 +21,11 @@ public class getQrData_Model {
         this.id = id;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return Status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         Status = status;
     }
 
@@ -35,9 +37,17 @@ public class getQrData_Model {
         Message = message;
     }
 
-    public class QR_Details{
+    public QR_Detail_Model getQR_Details() {
+        return QR_Details;
+    }
+
+    public void setQR_Details(QR_Detail_Model QR_Details) {
+        this.QR_Details = QR_Details;
+    }
+
+    public class QR_Detail_Model {
         private String id;
-        private String Coperation;
+        private int Coperation;
         private String QR_Id;
         private int QR_Type;
         private int QR_Expiry;
@@ -51,11 +61,11 @@ public class getQrData_Model {
         private int Pro_Code;
         private String Company_Code;
         private String Fix_Pump_Code;
-        private int Fuel_Limit;
+        private double Fuel_Limit;
         private String Pump_Code;
-        private int Actual_Fuel;
-        private int Fuel_Rate;
-        private int Fuel_Amount;
+        private double Actual_Fuel;
+        private double Fuel_Rate;
+        private double Fuel_Amount;
         private String Fleet_Code;
         private String Fuel_Up_Lat;
         private String Fuel_Up_Long;
@@ -63,9 +73,9 @@ public class getQrData_Model {
         private int Payment_Type;
         private int Payment_Status;
         private String Settelment_Id;
-        private String UM_User_Id = null;
+        private String UM_User_Id;
 
-        public QR_Details(String id, String coperation, String QR_Id, int QR_Type, int QR_Expiry, String QR_Generated_On, String QR_Expired_On, String member_System_Id, String member_FName, String member_LName, String member_Mobile, int pro_Type_Code, int pro_Code, String company_Code, String fix_Pump_Code, int fuel_Limit, String pump_Code, int actual_Fuel, int fuel_Rate, int fuel_Amount, String fleet_Code, String fuel_Up_Lat, String fuel_Up_Long, String fuel_Up_Location, int payment_Type, int payment_Status, String settelment_Id, String UM_User_Id) {
+        public QR_Detail_Model(String id, int coperation, String QR_Id, int QR_Type, int QR_Expiry, String QR_Generated_On, String QR_Expired_On, String member_System_Id, String member_FName, String member_LName, String member_Mobile, int pro_Type_Code, int pro_Code, String company_Code, String fix_Pump_Code, double fuel_Limit, String pump_Code, double actual_Fuel, double fuel_Rate, double fuel_Amount, String fleet_Code, String fuel_Up_Lat, String fuel_Up_Long, String fuel_Up_Location, int payment_Type, int payment_Status, String settelment_Id, String UM_User_Id) {
             this.id = id;
             Coperation = coperation;
             this.QR_Id = QR_Id;
@@ -104,11 +114,11 @@ public class getQrData_Model {
             this.id = id;
         }
 
-        public String getCoperation() {
+        public int getCoperation() {
             return Coperation;
         }
 
-        public void setCoperation(String coperation) {
+        public void setCoperation(int coperation) {
             Coperation = coperation;
         }
 
@@ -216,11 +226,11 @@ public class getQrData_Model {
             Fix_Pump_Code = fix_Pump_Code;
         }
 
-        public int getFuel_Limit() {
+        public double getFuel_Limit() {
             return Fuel_Limit;
         }
 
-        public void setFuel_Limit(int fuel_Limit) {
+        public void setFuel_Limit(double fuel_Limit) {
             Fuel_Limit = fuel_Limit;
         }
 
@@ -232,27 +242,27 @@ public class getQrData_Model {
             Pump_Code = pump_Code;
         }
 
-        public int getActual_Fuel() {
+        public double getActual_Fuel() {
             return Actual_Fuel;
         }
 
-        public void setActual_Fuel(int actual_Fuel) {
+        public void setActual_Fuel(double actual_Fuel) {
             Actual_Fuel = actual_Fuel;
         }
 
-        public int getFuel_Rate() {
+        public double getFuel_Rate() {
             return Fuel_Rate;
         }
 
-        public void setFuel_Rate(int fuel_Rate) {
+        public void setFuel_Rate(double fuel_Rate) {
             Fuel_Rate = fuel_Rate;
         }
 
-        public int getFuel_Amount() {
+        public double getFuel_Amount() {
             return Fuel_Amount;
         }
 
-        public void setFuel_Amount(int fuel_Amount) {
+        public void setFuel_Amount(double fuel_Amount) {
             Fuel_Amount = fuel_Amount;
         }
 

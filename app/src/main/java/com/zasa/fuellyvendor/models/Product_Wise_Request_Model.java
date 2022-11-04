@@ -1,4 +1,4 @@
-package com.zasa.fuellyvendor.Response;
+package com.zasa.fuellyvendor.models;
 
 import com.google.gson.annotations.SerializedName;
 

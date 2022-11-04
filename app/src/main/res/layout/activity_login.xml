@@ -224,55 +224,90 @@
 
         </androidx.cardview.widget.CardView>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:weightSum="2.3">-->
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="15dp"-->
+        <!--            android:weightSum="2.3">-->
 
-<!--            <View-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="2dip"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@color/primary" />-->
+        <!--            <View-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="2dip"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="@color/primary" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="0.3"-->
-<!--                android:gravity="center"-->
-<!--                android:text="or"-->
-<!--                android:textColor="@color/colorText"-->
-<!--                android:textSize="16dp" />-->
+        <!--            <TextView-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="0.3"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="or"-->
+        <!--                android:textColor="@color/colorText"-->
+        <!--                android:textSize="16dp" />-->
 
-<!--            <View-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="2dip"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@color/primary" />-->
+        <!--            <View-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="2dip"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="@color/primary" />-->
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/btnFingerprintLock"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_10sdp"-->
-<!--            android:elevation="@dimen/_4sdp"-->
-<!--            android:src="@drawable/ic_baseline_fingerprint_24" />-->
+        <LinearLayout
+            android:id="@+id/ors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:weightSum="2.3">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dip"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/primary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="or"
+                android:textColor="@color/colorText"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dip"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/primary" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnFingerprintLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:elevation="@dimen/_4sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_fingerprint_24" />
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/txt_fingerprint"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Use FingerPrint Sensor to Login"-->
-<!--            android:textColor="@color/black" />-->
+        <TextView
+            android:id="@+id/txt_fingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Use FingerPrint Sensor to Login"
+            android:textColor="@color/black" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     <LinearLayout
         android:layout_width="wrap_content"

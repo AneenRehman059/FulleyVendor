@@ -3,6 +3,7 @@ package com.zasa.fuellyvendor;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class Alerts {
 
         TextView progressTv = progressDialog.findViewById(R.id.progress_tv);
         progressTv.setText("Please wait...");
+        progressTv.setGravity(Gravity.CENTER|Gravity.CENTER_HORIZONTAL);
         progressTv.setTextColor(ContextCompat.getColor(context, R.color.white));
         progressTv.setTextSize(15F);
 

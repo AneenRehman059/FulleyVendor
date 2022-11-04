@@ -1,11 +1,11 @@
 package com.zasa.fuellyvendor;
 
-import com.zasa.fuellyvendor.Request.App_Detail_Request;
+import com.zasa.fuellyvendor.models.App_Detail_Request;
 import com.zasa.fuellyvendor.Request.Product_Wise_Request;
 import com.zasa.fuellyvendor.models.Member_Detail_Model;
 import com.zasa.fuellyvendor.models.getFuelUp;
 import com.zasa.fuellyvendor.models.getOmcListApi;
-import com.zasa.fuellyvendor.models.getQrData_Model;
+import com.zasa.fuellyvendor.models.GetQrData_Model;
 /*import com.zasa.fuellyvendor.Response.Member_Login_Api;*/
 
 import retrofit2.Call;
@@ -26,10 +26,10 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("Account/MemberLogin")
+    @POST("Pump/PumpLogin")
     Call<Member_Detail_Model> getMember_Detail(
-            @Field("Member_Mobile") String member_mobile,
-            @Field("Member_Password") String member_password
+            @Field("Pump_User_Id") String member_mobile,
+            @Field("Pump_User_Password") String member_password
     );
 
     @FormUrlEncoded
@@ -40,7 +40,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("QR/GetQRData")
-    Call<getQrData_Model.QR_Details> getQRData(
+    Call<GetQrData_Model> getQRData(
             @Field("Coperation") int coperation,
             @Field("QR_Id") String qr_id
     );
@@ -48,7 +48,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("QR/QRFuellup")
     Call<getFuelUp> getQrFuelup(
-            @Field("QR_Id") String qr_id,
+            String splitQr, @Field("QR_Id") String qr_id,
             @Field("Pump_Code") String pump_code,
             @Field("Actual_Fuel") double actual_fuel,
             @Field("Fuel_Up_Lat") String fuel_up_lat,

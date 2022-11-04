@@ -144,7 +144,7 @@
                             android:layout_height="@dimen/_170sdp"
                             android:elevation="@dimen/_10sdp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/banner"
+
                            />
 
                     </LinearLayout>
