@@ -9,7 +9,7 @@ public interface Constants {
     String EXCEPTION_MESSAGE = "Something went wrong. Please try again later";
     String EXCEPTION_EMPTY_ARRAY = "Data not found. Please try again later";
 
-    String NOT_ALLOW = "You are not allowed to Fuel Up this Pump.";
+    String NOT_ALLOW = "You are not allow to Fuel Up from this pump.";
 
 
 }

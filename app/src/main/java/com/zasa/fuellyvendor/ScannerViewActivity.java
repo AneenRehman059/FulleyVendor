@@ -139,6 +139,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                             fLimit = fuelLimit;
                                             actualFuel = fLimit;
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            intent.putExtra("code", code);
                                             startActivity(intent);
                                             Toast.makeText(ScannerViewActivity.this, "Fuel Up Plaease", Toast.LENGTH_SHORT).show();
 
@@ -153,7 +154,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                     }
                                 });
                             } else {
-                                Toast.makeText(context, "You are not allowed to Fuel Up from this Pump.", Toast.LENGTH_SHORT).show();
+                                new PumpWarningError().Show_Toast(ScannerViewActivity.this, view, getString(R.string.not_allow));
                             }
                         } else {
                             Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
@@ -170,6 +171,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                         actualFuel = fLimit;
 
                                         Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                        intent.putExtra("code", code);
                                         startActivity(intent);
                                         Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
 
@@ -225,6 +227,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                             Toast.makeText(ScannerViewActivity.this, "Fuel :" + actualFuel, Toast.LENGTH_SHORT).show();
 
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            intent.putExtra("code", code);
                                             startActivity(intent);
                                             Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
 
@@ -239,7 +242,8 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                     }
                                 });
                             } else {
-                                Toast.makeText(context, "You are not allowed to Fuel Up from this Pump.", Toast.LENGTH_SHORT).show();
+                                new PumpWarningError().Show_Toast(ScannerViewActivity.this, view, getString(R.string.not_allow));
+
                             }
                         } else {
                             Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
@@ -252,6 +256,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                         Toast.makeText(ScannerViewActivity.this, "FuelLimit :" + fuelLimit, Toast.LENGTH_SHORT).show();
                                         if (fuelLimit == actualFuel) {
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            intent.putExtra("code", code);
                                             startActivity(intent);
                                             Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
                                         }
@@ -288,9 +293,10 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
 
         code = rawResult.getText();
         Toast.makeText(context, "" + code, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context, Check_Fuel_LimitActivity.class);
-        intent.putExtra("code", code);
-        startActivity(intent);
+
+//        Intent intent = new Intent(context, Check_Fuel_LimitActivity.class);
+//        intent.putExtra("code", code);
+//        startActivity(intent);
         getQrData();
 
     }
