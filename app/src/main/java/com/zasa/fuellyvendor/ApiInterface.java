@@ -48,8 +48,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("QR/QRFuellup")
     Call<getFuelUp> getQrFuelup(
-            String splitQr, @Field("QR_Id") String qr_id,
+            @Field("QR_Id") String qr_id,
             @Field("Pump_Code") String pump_code,
+            @Field("QR_Expiry") int qr_expiry,
             @Field("Actual_Fuel") double actual_fuel,
             @Field("Fuel_Up_Lat") String fuel_up_lat,
             @Field("Fuel_Up_Long") String fuel_up_long,

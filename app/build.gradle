@@ -133,8 +133,6 @@ dependencies {
     //in App update
     implementation 'com.google.android.play:core:1.10.3'
 
-    implementation "com.airbnb.android:lottie:3.7.0"
-
     //FOR AdMode
     // implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
@@ -150,4 +148,5 @@ dependencies {
     implementation 'com.github.rehmanmuradali:ticker:1.0.1'
 
     implementation 'androidx.biometric:biometric:1.1.0'
+    implementation "com.airbnb.android:lottie:3.7.0"
 }

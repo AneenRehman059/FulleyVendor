@@ -24,6 +24,7 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.2075" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.147" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_cancel.xml" value="0.147" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_invalid_bg.xml" value="0.2075" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_notification.xml" value="0.147" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_notifications.xml" value="0.147" />
         <entry key="..\:/FuellyVendor/app/src/main/res/drawable/ic_phone.xml" value="0.147" />
@@ -59,6 +60,7 @@
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/content_home.xml" value="0.18" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/cstm_notification.xml" value="0.25" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/custom_dialog_progress.xml" value="0.19537037037037036" />
+        <entry key="..\:/FuellyVendor/app/src/main/res/layout/custom_error_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.29839883551673946" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/flag_dialog.xml" value="0.19537037037037036" />
         <entry key="..\:/FuellyVendor/app/src/main/res/layout/fragment_extra_services.xml" value="0.20416666666666666" />

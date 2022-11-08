@@ -13,8 +13,11 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +32,10 @@ import retrofit2.Response;
 
 public class Check_Fuel_LimitActivity extends AppCompatActivity {
     Button disburst;
+    ImageView success;
     EditText enterFuel;
     double e_fuel;
-    TextView loca, fleetCode,fuel_ltr;
-    String latitude;
-    String longitude;
+    TextView loca, fleetCode, fuel_ltr;
     LocationManager locationManager;
     private static final int REQUEST_LOCATION = 1;
     LottieAnimationView lottieAnimationView;
@@ -44,12 +46,13 @@ public class Check_Fuel_LimitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_fuel_limit);
 
         disburst = findViewById(R.id.btn_disburst);
-//        enterFuel = findViewById(R.id.enter_fuel);
         fleetCode = findViewById(R.id.fleetCode);
         fuel_ltr = findViewById(R.id.fuelLtr);
-        lottieAnimationView = findViewById(R.id.fpaimation);
-        lottieAnimationView.playAnimation();
-        lottieAnimationView.setSpeed(1);
+        success = findViewById(R.id.check);
+
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fly_in_from_left);
+        success.startAnimation(animation);
 
         String s = getIntent().getStringExtra("code");
 //        fleetCode.setText(s.split("U")[1]);

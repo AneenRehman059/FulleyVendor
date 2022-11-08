@@ -11,18 +11,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CustomToastError {
-
+public class ToastError {
 
     // Custom Toast Method
-    public void Show_Toast(Context context, View view, String exceptionMessage) {
+    public void Show_Toast(Context context, View view, String error) {
 
         if (context != null) {
             if (!((Activity) context).isFinishing()) {
                 final Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setCancelable(false);
-                dialog.setContentView(R.layout.flag_dialog);
+                dialog.setContentView(R.layout.custom_error_dialog);
+                TextView text = dialog.findViewById(R.id.text_dialog);
+                text.setText(error);
                 ImageButton dialogButton = dialog.findViewById(R.id.btn_dialog);
                 dialogButton.setOnClickListener(v -> dialog.dismiss());
                 dialog.show();
@@ -32,7 +33,7 @@ public class CustomToastError {
                     window.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.transparent)));
                 }
             } else {
-
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
             }
         }
     }

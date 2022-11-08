@@ -37,7 +37,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-public static String PREFS_NAME="MyPrefsFile";
+    public static String PREFS_NAME = "MyPrefsFile";
 
     ActivityLoginBinding binding;
 
@@ -45,7 +45,7 @@ public static String PREFS_NAME="MyPrefsFile";
     SharedPrefManager sharedPrefManager;
     SharedPreferences sharedPreference;
     Context context;
-    String st_phone,st_pass;
+    String st_phone, st_pass;
     ImageView ib_fingerlogin;
     TextView msgtex;
 
@@ -57,7 +57,6 @@ public static String PREFS_NAME="MyPrefsFile";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -65,17 +64,15 @@ public static String PREFS_NAME="MyPrefsFile";
         sharedPrefManager = new SharedPrefManager(context);// call custom sharedPrefManager Class constructure
 
         biometric();
-        sharedPreference = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-
-        SharedPreferences sharedPreferences = getSharedPreferences("save",0);
-        boolean Is_checked = sharedPreferences.getBoolean("value",true);
-        if (Is_checked){
+        SharedPreferences sharedPreferences = getSharedPreferences("save", 0);
+        boolean Is_checked = sharedPreferences.getBoolean("value", true);
+        if (Is_checked) {
             binding.btnFingerprintLock.setVisibility(View.VISIBLE);
             binding.ors.setVisibility(View.VISIBLE);
 
-        }
-        else {
+        } else {
             binding.btnFingerprintLock.setVisibility(View.GONE);
             binding.ors.setVisibility(View.GONE);
         }
@@ -90,14 +87,6 @@ public static String PREFS_NAME="MyPrefsFile";
             binding.etLoginUsername.setText(phone);
             binding.etLoginPass.setText(pass);
         }
-
-//        binding.btnFingerprintLock.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(context, "Biometric lock is under processing!", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
     }
 
     public void forgetPassword(View view) {
@@ -109,39 +98,37 @@ public static String PREFS_NAME="MyPrefsFile";
 
     public void LoginBtn(View view) {
 
-        if (isValid()){
+        if (isValid()) {
             signIn();
         }
     }
 
     private void signIn() {
 
-        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putBoolean("hasLoggedIn",true);
+        editor.putBoolean("hasLoggedIn", true);
         editor.commit();
 
-
-        Call<Member_Detail_Model> call = ApiClient.getApiService().getMember_Detail(st_phone,st_pass);
+        Call<Member_Detail_Model> call = ApiClient.getApiService().getMember_Detail(st_phone, st_pass);
         call.enqueue(new Callback<Member_Detail_Model>() {
             @Override
             public void onResponse(Call<Member_Detail_Model> call, Response<Member_Detail_Model> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     AnimatedDialog.show();
                     assert response.body() != null;
-                    if (response.body().getStatus().equals("1")){
+                    if (response.body().getStatus().equals("1")) {
                         Member_Detail_Model memberDetailModel = response.body();
 
-                        sharedPreference = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+                        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreference.edit();
-                        editor.putString(KEY_PUMP_CODE,memberDetailModel.getPump_Details().getPump_code());
+                        editor.putString(KEY_PUMP_CODE, memberDetailModel.getPump_Details().getPump_code());
                         editor.apply();
 
                         Toast.makeText(LoginActivity.this, "Login Successfuly", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,HomeActivity.class));
-                    }
-                    else {
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    } else {
                         Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -181,7 +168,7 @@ public static String PREFS_NAME="MyPrefsFile";
             // this means that the device doesn't contain your fingerprint
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
                 binding.txtFingerprint.setText("Your device doesn't have fingerprint saved,please check your security settings");
-                binding.btnFingerprintLock .setVisibility(View.GONE);
+                binding.btnFingerprintLock.setVisibility(View.GONE);
                 break;
         }
 
@@ -199,9 +186,10 @@ public static String PREFS_NAME="MyPrefsFile";
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
                 binding.txtFingerprint.setText("Login Successful");
-                Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
+
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
@@ -222,14 +210,14 @@ public static String PREFS_NAME="MyPrefsFile";
         });
     }
 
-    private boolean isValid(){
+    private boolean isValid() {
 
         st_phone = binding.etLoginUsername.getText().toString().trim();
         st_pass = binding.etLoginPass.getText().toString().trim();
 
         boolean is_valid = true;
 
-        if (st_phone.length()<11) {
+        if (st_phone.length() < 11) {
             binding.etLoginUsername.requestFocus();
             binding.etLoginUsername.setError("Enter correct phone number!");
             is_valid = false;
@@ -250,6 +238,5 @@ public static String PREFS_NAME="MyPrefsFile";
 
     @Override
     public void onClick(View v) {
-
     }
 }

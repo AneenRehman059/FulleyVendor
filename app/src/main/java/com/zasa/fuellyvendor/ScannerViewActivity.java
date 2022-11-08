@@ -29,6 +29,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.zasa.fuellyvendor.Retrofit.ApiClient;
+import com.zasa.fuellyvendor.Retrofit.Constants;
 import com.zasa.fuellyvendor.models.GetQrData_Model;
 import com.zasa.fuellyvendor.models.getFuelUp;
 
@@ -43,8 +44,10 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
     Context context;
     ProgressDialog progressDialog;
     String code;
-    String expireQr,fuelUpLocation;
-    double actualFuel;
+    String fuelUpLocation;
+    int expireQr;
+    double actualFuel, fuelLimit;
+    View view;
 
     ZXingScannerView zXingScannerView;
     ImageView flashOn, flashOff;
@@ -80,9 +83,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
         zXingScannerView = findViewById(R.id.zxing);
         TextLay = findViewById(R.id.Text);
 
-        sharedPreference = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        /// TextLay.setSelected(true);  // Set focus to the textview (moving text)
-        // TextLay.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        sharedPreference = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         requestForCameraPermission();
 
@@ -98,26 +99,175 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
     }
 
     private void getQrData() {
-//        s = getIntent().getStringExtra("code")
+
+        //        s = getIntent().getStringExtra("code")
 
         String fullQr = code;
-        String s = fullQr.substring(0,1);
 
 //        fullQr.substring(0,1) != "U"
 
-        if (!code.startsWith("U")){
+        if (code.startsWith("U")) {
 
-            Call<GetQrData_Model> callQr = ApiClient.getApiService().getQRData(1,fullQr);
+            String splitQr = code.split("U")[1];
+
+            Call<GetQrData_Model> call = ApiClient.getApiService().getQRData(1, splitQr);
+            call.enqueue(new Callback<GetQrData_Model>() {
+                @Override
+                public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
+                    Toast.makeText(ScannerViewActivity.this, splitQr, Toast.LENGTH_SHORT).show();
+
+                    GetQrData_Model qrDetails = response.body();
+
+                    expireQr = qrDetails.getQR_Details().getQR_Expiry();
+                    actualFuel = qrDetails.getQR_Details().getActual_Fuel();
+                    fuelUpLocation = qrDetails.getQR_Details().getFuel_Up_Location();
+                    fuelLimit = qrDetails.getQR_Details().getFuel_Limit();
+
+                    if (response.isSuccessful()) {
+                        String loginPumpCode = sharedPreference.getString(KEY_PUMP_CODE, null);
+                        Toast.makeText(context, qrDetails.getQR_Details().getFix_Pump_Code(), Toast.LENGTH_SHORT).show();
+                        if (qrDetails.getQR_Details().getFix_Pump_Code() != null) {
+                            if (qrDetails.getQR_Details().getFix_Pump_Code().equals(loginPumpCode)) {
+                                Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(splitQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                                callFuelUp.enqueue(new Callback<getFuelUp>() {
+                                    @Override
+                                    public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
+                                        getFuelUp fuelUp = response.body();
+                                        if (response.isSuccessful()) {
+
+                                            double fLimit;
+                                            fLimit = fuelLimit;
+                                            actualFuel = fLimit;
+                                            Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            startActivity(intent);
+                                            Toast.makeText(ScannerViewActivity.this, "Fuel Up Plaease", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<getFuelUp> call, Throwable t) {
+                                        Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(context, "You are not allowed to Fuel Up from this Pump.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                            callFuelUp.enqueue(new Callback<getFuelUp>() {
+                                @Override
+                                public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
+                                    getFuelUp fuelUp = response.body();
+                                    if (response.isSuccessful()) {
+//                                            Toast.makeText(context,"Fix pump Code" +qrDetails.getQR_Details().getFix_Pump_Code()+ "\n"+ loginPumpCode, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ScannerViewActivity.this, "Fuel Limit :" + fuelLimit, Toast.LENGTH_SHORT).show();
+
+                                        double fLimit;
+                                        fLimit = fuelLimit;
+                                        actualFuel = fLimit;
+
+                                        Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                        startActivity(intent);
+                                        Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<getFuelUp> call, Throwable t) {
+                                    Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    } else {
+                        Toast.makeText(ScannerViewActivity.this, "Somthing Wrong Try Again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetQrData_Model> call, Throwable t) {
+                    new CustomToastError().Show_Toast(ScannerViewActivity.this, view, Constants.EXCEPTION_MESSAGE);
+                }
+            });
+        } else {
+
+            Call<GetQrData_Model> callQr = ApiClient.getApiService().getQRData(1, fullQr);
             callQr.enqueue(new Callback<GetQrData_Model>() {
                 @Override
                 public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
                     GetQrData_Model qrDetails = response.body();
-                    if (response.isSuccessful()){
-
-                        Toast.makeText(context, qrDetails.getQR_Details().getMember_FName(), Toast.LENGTH_SHORT).show();
+                    if (response.isSuccessful()) {
                         String loginPumpCode = sharedPreference.getString(KEY_PUMP_CODE, null);
-                    }
-                    else {
+                        expireQr = qrDetails.getQR_Details().getQR_Expiry();
+                        actualFuel = qrDetails.getQR_Details().getActual_Fuel();
+                        fuelUpLocation = qrDetails.getQR_Details().getFuel_Up_Location();
+                        fuelLimit = qrDetails.getQR_Details().getFuel_Limit();
+
+                        if (qrDetails.getQR_Details().getFix_Pump_Code() != null) {
+                            if (qrDetails.getQR_Details().getFix_Pump_Code().equals(loginPumpCode)) {
+                                Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                                callFuelUp.enqueue(new Callback<getFuelUp>() {
+                                    @Override
+                                    public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
+                                        getFuelUp fuelUp = response.body();
+                                        if (response.isSuccessful()) {
+//                                            Toast.makeText(context,"Fix pump Code" +qrDetails.getQR_Details().getFix_Pump_Code()+ "\n"+ loginPumpCode, Toast.LENGTH_SHORT).show();
+
+                                            double fLimit;
+                                            fLimit = fuelLimit;
+                                            actualFuel = fLimit;
+
+                                            Toast.makeText(ScannerViewActivity.this, "Fuel :" + actualFuel, Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            startActivity(intent);
+                                            Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<getFuelUp> call, Throwable t) {
+                                        Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(context, "You are not allowed to Fuel Up from this Pump.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                            callFuelUp.enqueue(new Callback<getFuelUp>() {
+                                @Override
+                                public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
+                                    getFuelUp fuelUp = response.body();
+                                    if (response.isSuccessful()) {
+//                                            Toast.makeText(context,"Fix pump Code" +qrDetails.getQR_Details().getFix_Pump_Code()+ "\n"+ loginPumpCode, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ScannerViewActivity.this, "FuelLimit :" + fuelLimit, Toast.LENGTH_SHORT).show();
+                                        if (fuelLimit == actualFuel) {
+                                            Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
+                                            startActivity(intent);
+                                            Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<getFuelUp> call, Throwable t) {
+                                    Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                    } else {
                         Toast.makeText(context, "Server Error", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -128,113 +278,20 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                 }
             });
         }
-        else {
 
-            String splitQr = code.split("U")[1];
-
-            Call<GetQrData_Model> call = ApiClient.getApiService().getQRData(1, splitQr);
-            call.enqueue(new Callback<GetQrData_Model>() {
-                @Override
-                public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
-                    GetQrData_Model qrDetails = response.body();
-                    Toast.makeText(ScannerViewActivity.this, splitQr, Toast.LENGTH_SHORT).show();
-                    expireQr = qrDetails.getQR_Details().getQR_Expired_On();
-                    actualFuel = qrDetails.getQR_Details().getActual_Fuel();
-                    fuelUpLocation = qrDetails.getQR_Details().getFuel_Up_Location();
-                    if (response.isSuccessful()) {
-                        String loginPumpCode = sharedPreference.getString(KEY_PUMP_CODE, null);
-                        if (qrDetails.getQR_Details().getFix_Pump_Code() == loginPumpCode)
-                        {
-                           Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(splitQr,loginPumpCode,expireQr,actualFuel,latitude,longitude,fuelUpLocation);
-                       callFuelUp.enqueue(new Callback<getFuelUp>() {
-                           @Override
-                           public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
-                               if (response.isSuccessful()){
-
-                                   Intent intent = new Intent(ScannerViewActivity.this,Check_Fuel_LimitActivity.class);
-                                   startActivity(intent);
-                               }
-                               else {
-                                   getFuelUp fuelUp = response.body();
-                                   Toast.makeText(ScannerViewActivity.this,fuelUp.getMessage() , Toast.LENGTH_SHORT).show();
-                               }
-                           }
-
-                           @Override
-                           public void onFailure(Call<getFuelUp> call, Throwable t) {
-                               Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                           }
-                       });
-                        }
-                        else {
-                            Toast.makeText(context, "You are not allowed to Fuel Up from this .", Toast.LENGTH_SHORT).show();
-                        }
-                    } else
-                    {
-                        Toast.makeText(ScannerViewActivity.this, "Somthing Wrong Try Again", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<GetQrData_Model> call, Throwable t) {
-                    Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-//        Call<GetQrData_Model> call = ApiClient.getApiService().getQRData(1, s);
-//        call.enqueue(new Callback<GetQrData_Model>() {
-//            @Override
-//            public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
-//                GetQrData_Model qrDetails = response.body();
-//                String code = qrDetails.getMessage();
-//                Toast.makeText(ScannerViewActivity.this, "Fleet Code :" + code, Toast.LENGTH_SHORT).show();
-//
-//                String getQrId = qrDetails.getQR_Details().getQR_Id();
-//                double actualFuel = qrDetails.getQR_Details().getActual_Fuel();
-//                String fuelUpLocation = qrDetails.getQR_Details().getFuel_Up_Location();
-//
-//                if (qrDetails.getQR_Details().getQR_Type() == 2) {
-//                    if (qrDetails.getQR_Details().getFix_Pump_Code() != null) {
-//                        if (qrDetails.getQR_Details().getFix_Pump_Code().equals(qrDetails.getQR_Details().getPump_Code())) {
-//
-//                        } else {
-//                            Toast.makeText(ScannerViewActivity.this, "Not allowed to fuel up thid pump", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    } else {
-//                        Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
-//                        startActivity(intent);
-//                    }
-//                } else {
-//                    Intent intent1 = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
-//                    startActivity(intent1);
-////                    Toast.makeText(ScannerViewActivity.this,("Your Location "+"\n"+"Latitude: "+latitude+"Longitude: "+longitude), Toast.LENGTH_SHORT).show();
-//                    String fcode = qrDetails.getQR_Details().getFleet_Code();
-//                    Toast.makeText(ScannerViewActivity.this, "Fleet" + fcode, Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GetQrData_Model> call, Throwable t) {
-//                Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
-
 
     @Override
     public void handleResult(Result rawResult) {
 
         //scanned item code
+
         code = rawResult.getText();
         Toast.makeText(context, "" + code, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, Check_Fuel_LimitActivity.class);
         intent.putExtra("code", code);
         startActivity(intent);
         getQrData();
-
 
     }
 
@@ -353,7 +410,6 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
         flashOff.setVisibility(View.GONE);
     }
 
-
     private void restartScanner() {
         zXingScannerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -374,6 +430,4 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
             }
         });
     }
-
-
 }

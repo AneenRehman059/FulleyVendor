@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.OTPVerification;
 
 public class BaseActivity extends AppCompatActivity implements LogoutListener {
@@ -28,6 +29,6 @@ public class BaseActivity extends AppCompatActivity implements LogoutListener {
     public void onSessionLogout() {
         finish();
 
-        startActivity(new Intent(this, OTPVerification.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

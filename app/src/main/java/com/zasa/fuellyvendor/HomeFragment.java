@@ -135,7 +135,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     public void ImageSliderAdapter() {
-        Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
+        // replace FU with FV
+        Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FU");
         call.enqueue(new Callback<App_Detail_Request>() {
             @Override
             public void onResponse(@NonNull Call<App_Detail_Request> call, @NonNull Response<App_Detail_Request> response) {

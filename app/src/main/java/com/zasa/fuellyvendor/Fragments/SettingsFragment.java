@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.zasa.fuellyvendor.BuildConfig;
 import com.zasa.fuellyvendor.Change_Tpin_Activity;
 import com.zasa.fuellyvendor.HomeActivity;
 import com.zasa.fuellyvendor.Login.LoginActivity;
@@ -23,6 +26,7 @@ import com.zasa.fuellyvendor.R;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     View view;
+    TextView appVersion;
     LinearLayout change_pass,check_notification,logout;
     SwitchCompat is_biometric;
     public SettingsFragment() {
@@ -38,6 +42,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
          getid();
          check_biometric();
+
+        int versionCode = BuildConfig.VERSION_CODE;
+        String versionName = BuildConfig.VERSION_NAME;
+        appVersion.setText("App Version:"+versionName);
+        Toast.makeText(getContext(), "version"+versionName, Toast.LENGTH_SHORT).show();
 
          check_notification.setOnClickListener(this);
          change_pass.setOnClickListener(this);
@@ -71,6 +80,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getid() {
+        appVersion = view.findViewById(R.id.version);
         change_pass = view.findViewById(R.id.reset_pass);
         check_notification = view.findViewById(R.id.notification);
         logout = view.findViewById(R.id.logout);
