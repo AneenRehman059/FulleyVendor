@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt_date"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:layout_marginLeft="@dimen/_10sdp"-->
+<!--        android:text="Date"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/txt_date"-->
+<!--        android:id="@+id/txt_c_name"-->
+<!--        android:text="Company  Name"-->
+<!--        android:textSize="@dimen/_14sdp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_marginLeft="@dimen/_10sdp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt_p_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/txt_c_name"-->
+<!--        android:layout_marginLeft="@dimen/_10sdp"-->
+<!--        android:text="Pump Name"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt_quantity"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/txt_p_name"-->
+<!--        android:layout_marginLeft="@dimen/_10sdp"-->
+<!--        android:text="Quantity"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/date"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="@dimen/_110sdp"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:layout_toRightOf="@+id/txt_date"-->
+<!--        android:text="8-6-2022"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/date"-->
+<!--        android:layout_toRightOf="@+id/txt_date"-->
+<!--        android:id="@+id/company_name"-->
+<!--        android:text="Sabrosso Ltd"-->
+<!--        android:textSize="@dimen/_14sdp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_marginLeft="@dimen/_110sdp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/pump_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/company_name"-->
+<!--        android:layout_marginLeft="@dimen/_110sdp"-->
+<!--        android:layout_toRightOf="@+id/txt_date"-->
+<!--        android:text="At PSO Gulberg"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/quantity"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/pump_name"-->
+<!--        android:layout_marginLeft="@dimen/_110sdp"-->
+<!--        android:layout_toRightOf="@+id/txt_date"-->
+<!--        android:text="20 Ltrs"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/amount"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:layout_below="@+id/quantity"-->
+<!--        android:layout_marginLeft="@dimen/_180sdp"-->
+<!--        android:layout_toRightOf="@+id/txt_date"-->
+<!--        android:text="Rs,20000"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/primary"-->
+<!--        android:layout_below="@id/amount"-->
+<!--        android:layout_marginTop="@dimen/_5sdp"/>-->
+
+</RelativeLayout>

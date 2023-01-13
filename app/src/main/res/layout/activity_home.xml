@@ -1,33 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeActivity"
-    tools:openDrawer="start">
+    tools:context=".HomeActivity">
 
-
-    <include
-        layout="@layout/nav_drawer_toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer"
+        android:orientation="vertical">
 
-    <include
-        layout="@layout/content_home"
+<!--        <FrameLayout-->
+<!--            android:id="@+id/fragmentContainer"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginBottom="?attr/actionBarSize" />-->
+
+    </LinearLayout>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/primary"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="10dp">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@drawable/transparent_background"
+            app:itemIconTint="@color/white"
 
-    app:itemBackground="@drawable/menu_item_padding"
-    app:itemHorizontalPadding="@dimen/_20sdp"
-    app:itemIconPadding="@dimen/_15sdp"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_nav_menu" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFuelly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/n11"
+        app:tint="@null"
+        android:elevation="0dp"
+        app:borderWidth="@dimen/_3sdp"
+        android:tint="@null"
+        app:layout_anchor="@id/bottomAppBar"
+        app:maxImageSize="@dimen/_62sdp"
+        />
 
-</RelativeLayout>
-
-
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,8 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
+import com.lusfold.spinnerloading.SpinnerLoading;
+import com.zasa.fuellyvendor.HomeActivity;
 import com.zasa.fuellyvendor.Retrofit.ApiClient;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.OTPVerification;
@@ -35,6 +40,10 @@ import com.zasa.fuellyvendor.models.App_Detail_Request;
 import com.zasa.fuellyvendor.SignUpOtp;
 import com.zasa.fuellyvendor.Utils.Internet;
 import com.zasa.fuellyvendor.Utils.SharedPrefManager;
+import com.zasa.fuellyvendor.models.GetQrData_Model;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,14 +55,16 @@ public class SplashActivity extends AppCompatActivity {
 
     AppUpdateManager appUpdateManager;
     public static final int RC_APP_UPDATEE = 104;
-
     private static final long SPLASH_SCREEN_TIME_OUT = 2000;//3sec
     Context context;
+    SpinnerLoading spl;
     ProgressBar progressBar;
+    Animation fade_in;
+    Timer timer;
+    int count = 0;
     SharedPrefManager sharedPrefManager;
     boolean isHandlerRun = true;
     TextView solo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +80,19 @@ public class SplashActivity extends AppCompatActivity {
 //            setTheme(R.style.Theme_Light);}
 
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_splash);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-            solo = findViewById(R.id.sologen);
+        context = SplashActivity.this;
+        progressBar = findViewById(R.id.progressbar);
+
+        solo = findViewById(R.id.sologen);
+
+        fade_in = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        progressBar.setAnimation(fade_in);
+//        spl = findViewById(R.id.spinnerLoading);
+//        spl.setPaintMode(1);
+//        spl.setCircleRadius(10);
 
 
         Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
@@ -80,8 +100,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<App_Detail_Request> call, Response<App_Detail_Request> response) {
                 App_Detail_Request app_detail_request = response.body();
-                if (response.isSuccessful()){
-                    String solod  = app_detail_request.getApp_Details().getAppSolo();
+                if (response.isSuccessful()) {
+                    String solod = app_detail_request.getApp_Details().getAppSolo();
                     solo.setText(solod);
                 }
             }
@@ -94,121 +114,113 @@ public class SplashActivity extends AppCompatActivity {
 
 
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            // To hide Status bar
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // To hide Status bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            context = SplashActivity.this;
-            progressBar = findViewById(R.id.progressbar);
-
-
-            ///////app update 1///////
-            appUpdateManager = AppUpdateManagerFactory.create(this);
-            appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-                @Override
-                public void onSuccess(AppUpdateInfo result) {
-                    if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                            && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                        try {
-                            appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE,
-                                    SplashActivity.this, RC_APP_UPDATEE);
-                        } catch (IntentSender.SendIntentException e) {
-                            Toast.makeText(context, "update error", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    } else {
-                        handler();
-                        Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            });
-
-            handler();
-
-
-        }
-
-        ///////app update 2////
-        private InstallStateUpdatedListener installStateUpdatedListener = new InstallStateUpdatedListener() {
+        ///////app update 1///////
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
-            public void onStateUpdate(@NonNull InstallState state) {
-                if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                    showCompletedUpdate();
+            public void onSuccess(AppUpdateInfo result) {
+                if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                        && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE,
+                                SplashActivity.this, RC_APP_UPDATEE);
+                    } catch (IntentSender.SendIntentException e) {
+                        Toast.makeText(context, "update error", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                } else {
+                    handler();
+                    Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
+
                 }
             }
-        };
+        });
 
-        private void showCompletedUpdate () {
+        handler();
+    }
 
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "New App is ready!", Snackbar.LENGTH_INDEFINITE);
-            snackbar.setAction("Install", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    appUpdateManager.completeUpdate();
-                }
-            });
-            snackbar.show();
-        }
-
+    ///////app update 2////
+    private InstallStateUpdatedListener installStateUpdatedListener = new InstallStateUpdatedListener() {
         @Override
-        public void onActivityResult ( int requestCode, int resultCode, Intent data){
-            super.onActivityResult(requestCode, resultCode, data);
-            /////////update app condition
-            if (requestCode == RC_APP_UPDATEE && resultCode != RESULT_OK) {
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+        public void onStateUpdate(@NonNull InstallState state) {
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                showCompletedUpdate();
             }
         }
+    };
 
-        @Override
-        protected void onResume () {
-            super.onResume();
+    private void showCompletedUpdate() {
 
-            //  appUpdateManager = AppUpdateManagerFactory.create(this);
-            appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-                @Override
-                public void onSuccess(AppUpdateInfo result) {
-                    if (result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                        try {
-                            appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, SplashActivity.this, RC_APP_UPDATEE);
-                        } catch (IntentSender.SendIntentException e) {
-                            Toast.makeText(context, "2 error", Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "New App is ready!", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("Install", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appUpdateManager.completeUpdate();
+            }
+        });
+        snackbar.show();
+    }
 
-                            e.printStackTrace();
-                        }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /////////update app condition
+        if (requestCode == RC_APP_UPDATEE && resultCode != RESULT_OK) {
+            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //  appUpdateManager = AppUpdateManagerFactory.create(this);
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo result) {
+                if (result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, SplashActivity.this, RC_APP_UPDATEE);
+                    } catch (IntentSender.SendIntentException e) {
+                        Toast.makeText(context, "2 error", Toast.LENGTH_SHORT).show();
+
+                        e.printStackTrace();
                     }
                 }
-            });
-        }
-        ////////////////////////////app update 2 end////////////
+            }
+        });
+    }
+    ////////////////////////////app update 2 end////////////
 
-        private void handler () {
-            if (!Internet.isNetConnected(context)) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "You are not connected with internet!", Toast.LENGTH_LONG).show();
-                onBackPressed();
-            } else {
+    private void handler() {
+        if (!Internet.isNetConnected(context)) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(), "You are not connected with internet!", Toast.LENGTH_LONG).show();
+            onBackPressed();
+        } else {
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+                    boolean hasLoggedIn = sharedPreferences.getBoolean("hasLoggedIn", false);
+                    boolean hasSignedUp = sharedPreferences.getBoolean("hasSignedUp", true);
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PREFS_NAME,0);
-                        boolean hasLoggedIn = sharedPreferences.getBoolean("hasLoggedIn",false);
-                        boolean hasSignedUp = sharedPreferences.getBoolean("hasSignedUp",true);
-
-                        if (hasLoggedIn){
-                            Intent intent = new Intent(SplashActivity.this, OTPVerification.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-
-                        else {
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                    if (hasLoggedIn) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        progressBar.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
 
 //                        if (hasSignedUp){
 //                            Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
@@ -218,7 +230,7 @@ public class SplashActivity extends AppCompatActivity {
 //
 //                        else
 //                        {
-//                            Intent intent = new Intent(SplashActivity.this, SignUpOtp.class);
+//                            Intent intent = new Intent(SplashActivity.this, OTPVerification.class);
 //                            startActivity(intent);
 //                            finish();
 //                        }
@@ -227,14 +239,14 @@ public class SplashActivity extends AppCompatActivity {
 //                        progressBar.setVisibility(View.GONE);
 //                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //                        finish();
-                    }
-                }, SPLASH_SCREEN_TIME_OUT);
-            }
-        }
-
-        @Override
-        public void onBackPressed () {
-            super.onBackPressed();
-            finish();
+                }
+            }, SPLASH_SCREEN_TIME_OUT);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+}

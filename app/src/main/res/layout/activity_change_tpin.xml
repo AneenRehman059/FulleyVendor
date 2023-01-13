@@ -21,7 +21,7 @@
             android:src="@drawable/ic_arrow_back" />
 
         <TextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvSetting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -53,6 +53,7 @@
 
         <EditText
             style="@style/style_edittext"
+            android:background="@drawable/ed_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/existing_tpin"
@@ -74,6 +75,7 @@
             android:layout_marginTop="20dp"/>
 
         <EditText
+            android:background="@drawable/ed_background"
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +102,7 @@
             style="@style/style_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/ed_background"
             android:id="@+id/conform_tpin"
             android:layout_marginTop="10dp"
             android:hint="* * * *"

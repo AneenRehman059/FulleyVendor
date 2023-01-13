@@ -15,7 +15,7 @@
         android:background="@color/primary">
 
         <TextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvSetting"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -78,13 +78,14 @@
     <!--        android:paddingLeft="@dimen/_50sdp"-->
     <!--        android:paddingRight="@dimen/_50sdp"/>-->
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/check"
-        android:src="@drawable/check"
+        app:lottie_rawRes="@raw/success"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        app:lottie_autoPlay="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -114,7 +115,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:text="Vehicle Number : "
             android:fontFamily="@font/gilroy_bold"
             android:textSize="16dp"
@@ -124,11 +125,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
                 android:id="@+id/fleetCode"
-                android:textSize="22sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textColor="@color/colorText" />
 
         </LinearLayout>
         <LinearLayout

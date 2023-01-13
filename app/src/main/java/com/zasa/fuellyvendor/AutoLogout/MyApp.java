@@ -1,11 +1,24 @@
 package com.zasa.fuellyvendor.AutoLogout;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.zasa.fuellyvendor.PrefsManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MyApp extends Application {
+
+    public static Context context;
+    @Override
+
+    public void onCreate() {
+        super.onCreate();
+        context=this;
+        new PrefsManager();
+
+    }
     private LogoutListener listener;
     private Timer timer;
 

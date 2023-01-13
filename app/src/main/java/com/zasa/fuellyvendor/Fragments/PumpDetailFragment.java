@@ -195,8 +195,6 @@ public class PumpDetailFragment extends Fragment {
 
     private void getVehicleList() {
 
-
-
         ArrayList<String> NameList = new ArrayList<>();
         Call<getOmcListApi> call = ApiClient.getApiService().getOmcDetail(1);
         call.enqueue(new Callback<getOmcListApi>() {

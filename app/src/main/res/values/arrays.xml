@@ -21,6 +21,19 @@
         <item>Diesel</item>
     </string-array>
 
+    <string-array name="lubricant_type">
+        <item>Select Lubricant Type</item>
+        <item>Hi-Oct</item>
+        <item>Diesel</item>
+    </string-array>
+
+    <string-array name="extra_service">
+        <item>Select Extra Service Lubricant</item>
+        <item>Hi-Oct</item>
+        <item>Diesel</item>
+    </string-array>
+
+
     <string-array name="company_complaint">
         <item>Select Complaint</item>
         <item>Billing</item>

@@ -11,55 +11,59 @@
 
     android:background="@drawable/lb_splash_bg"
 
+    <ImageView
+        android:id="@+id/img_fuelli"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_150sdp"
+        android:src="@drawable/n11" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/splashLogo"-->
-<!--        android:layout_width="@dimen/_180sdp"-->
-<!--        android:layout_height="@dimen/_85sdp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:background="@drawable/smilelogo"-->
-<!--        android:scaleType="fitCenter" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+       android:layout_below="@+id/img_fuelli"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/sologen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:id="@+id/sologen"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/primary"
             android:textStyle="bold" />
 
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="sans-serif"-->
-<!--            android:text="Fuel Management Framework"-->
-<!--            android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
-<!--            android:textColor="@color/secondary"-->
-<!--            android:textStyle="bold" />-->
 
     </LinearLayout>
 
 
+
     <ProgressBar
         android:id="@+id/progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/progress_bg"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_50sdp"
-        android:indeterminate="true"
         android:indeterminateTint="@color/primary"
+        tools:targetApi="lollipop"
         android:indeterminateTintMode="src_atop" />
+
+
+<!--    <com.lusfold.spinnerloading.SpinnerLoading-->
+<!--        android:id="@+id/spinnerLoading"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginBottom="@dimen/_50sdp"-->
+<!--        android:background="@color/bgColor" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -88,36 +92,6 @@
                   android:textColor="@color/secondary"
                   android:textStyle="bold" />
 
-<!--        <ImageView-->
-<!--            android:layout_width="@dimen/_50sdp"-->
-<!--            android:layout_height="@dimen/_25sdp"-->
-<!--            android:src="@drawable/lb_logo" />-->
     </LinearLayout>
-
-    <!-- <LinearLayout
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="@dimen/_6sdp"
-         android:orientation="horizontal"
-         android:paddingHorizontal="@dimen/_10sdp"
-         android:paddingVertical="@dimen/_1sdp">        android:background="@drawable/round_btn_style"
-
-
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Powered by  "
-             android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="LOYALTY BUNCH"
-             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-             android:textColor="@color/secondary"
-             android:textStyle="bold" />
-     </LinearLayout>-->
 
 </RelativeLayout>

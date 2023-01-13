@@ -1,10 +1,12 @@
 package com.zasa.fuellyvendor;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,14 +16,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.zasa.fuellyvendor.AutoLogout.BaseActivity;
 import com.zasa.fuellyvendor.Fragments.LedgerFragment;
@@ -40,8 +46,10 @@ public class HomeActivity extends BaseActivity  {
     ActivityHomeBinding binding;
     BottomNavigationView bottomNavigationView;
     Context context;
-    TextView btn_scan;
+    FloatingActionButton btn_scan;
     String AdsImageActivity,AdsLinksFromServer;
+    LinearLayoutCompat layout;
+    RelativeLayout layout_Home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,13 +129,15 @@ public class HomeActivity extends BaseActivity  {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         checkFlag();
         initView();
-
     }
 
     public void checkFlag() {
 //        AnimatedDialog.show();
+
         Call<App_Detail_Request> call = ApiClient.getApiService().appDetails("FV");
         call.enqueue(new Callback<App_Detail_Request>() {
             @Override
@@ -160,9 +170,10 @@ public class HomeActivity extends BaseActivity  {
         });
     }
 
-
     private void initView() {
 
+//        layout_Home = findViewById(R.id.homeLayout);
+//        layout = findViewById(R.id.drawer);
         btn_scan = findViewById(R.id.btnFuelly);
 
         btn_scan.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +187,7 @@ public class HomeActivity extends BaseActivity  {
 
         loadFragment(new HomeFragment());
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
+        bottomNavigationView.setBackground(null);
         //set home selected
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, new HomeFragment());
@@ -193,6 +205,9 @@ public class HomeActivity extends BaseActivity  {
                 loadFragment(new MoreFragment());
             }
             else if (item.getItemId() == R.id.settings) {
+//              Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+//              startActivity(intent);
+
                 loadFragment(new SettingsFragment());
             }
             return true;
@@ -234,7 +249,6 @@ public class HomeActivity extends BaseActivity  {
                 }
                 Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                 startActivity(intent);
-
             }
         });
     }
@@ -261,9 +275,9 @@ public class HomeActivity extends BaseActivity  {
 //        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 //    }
 
-
     @Override
     protected void onPause() {
         super.onPause();
     }
+
 }

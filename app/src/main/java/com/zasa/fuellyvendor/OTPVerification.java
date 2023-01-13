@@ -24,257 +24,153 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.goodiebag.pinview.Pinview;
 import com.mattprecious.swirl.SwirlView;
 import com.zasa.fuellyvendor.Login.LoginActivity;
 import com.zasa.fuellyvendor.Splash.SplashActivity;
+import com.zasa.fuellyvendor.databinding.ActivityOtpverificationBinding;
 
 import java.util.concurrent.Executor;
 
-public class OTPVerification extends AppCompatActivity implements View.OnClickListener {
+public class OTPVerification extends AppCompatActivity  {
     private EditText OTPEt1, OTPEt2, OTPEt3, OTPEt4;
     private TextView resendBtn;
     AppCompatButton verifyBtn;
-    ImageView ib_fingerlogin;
-    TextView msgtex,sugn_up;
+    ImageView ib_fingerlogin , login_tp;
+    TextView msgtex, sugn_up;
     LinearLayout Or;
-    public static String PREFS_NAME="save";
-
-    // true after every 60 sec
-    private boolean resnedEnabled = false;
-
-    // resend time in seconds
-    private int resendTime = 60;
-
-    private int selectedETPosition = 0;
+    Pinview pinview;
+    public static String PREFS_NAME = "save";
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "mypref";
+    private static final String OTP_VALUE = "otp_value";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpverification);
 
-        // getting email and mobile from Register activity through intent
-//        final String getEmail = getIntent().getStringExtra("email");
-        final String getMobile = getIntent().getStringExtra("mobile");
-
-        final TextView otpMobile = findViewById(R.id.otpMobile);
-        // setting email and mobile on textview
-        otpMobile.setText(getMobile);
-
+//        String pin = binding.myPinViewID.getValue();
         initView();
-//        biometric();
+        biometric();
 
-        OTPEt1.addTextChangedListener(textWatcher);
-        OTPEt2.addTextChangedListener(textWatcher);
-        OTPEt3.addTextChangedListener(textWatcher);
-        OTPEt4.addTextChangedListener(textWatcher);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        String name = sharedPreferences.getString(OTP_VALUE,null);
+        Toast.makeText(this, "OTP"+name, Toast.LENGTH_SHORT).show();
 
-
-//        SharedPreferences sharedPreferences = getSharedPreferences(OTPVerification.PREFS_NAME,0);
-//        boolean Is_checked = sharedPreferences.getBoolean("value",true);
-//        if (Is_checked){
-//            ib_fingerlogin.setVisibility(View.VISIBLE);
-//            Or.setVisibility(View.VISIBLE);
-//
-//        }
-//        else {
-//            ib_fingerlogin.setVisibility(View.GONE);
-//            Or.setVisibility(View.GONE);
-//        }
-
-        showKeyboard(OTPEt1);
-
-        // start resend count down timer
-        startCountDownTimer();
-
-        verifyBtn.setOnClickListener(this);
-        resendBtn.setOnClickListener(this);
-
-    }
-
-
-//    private void biometric() {
-//
-//        // BIOMETRIC FINGERPRINT
-//        BiometricManager biometricManager = BiometricManager.from(this);
-//        switch (biometricManager.canAuthenticate()) {
-//
-//            // this means we can use biometric sensor
-//            case BiometricManager.BIOMETRIC_SUCCESS:
-//                msgtex.setText("You can use the fingerprint sensor to login");
-//                msgtex.setTextColor(Color.parseColor("#fafafa"));
-//                break;
-//
-//            // this means that the device doesn't have fingerprint sensor
-//            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
-//                msgtex.setText("This device doesnot have a fingerprint sensor");
-//                ib_fingerlogin.setVisibility(View.GONE);
-//                break;
-//
-//            // this means that biometric sensor is not available
-//            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
-//                msgtex.setText("The biometric sensor is currently unavailable");
-//                ib_fingerlogin.setVisibility(View.GONE);
-//                break;
-//
-//            // this means that the device doesn't contain your fingerprint
-//            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-//                msgtex.setText("Your device doesn't have fingerprint saved,please check your security settings");
-//                ib_fingerlogin.setVisibility(View.GONE);
-//                break;
-//        }
-//
-//
-//        Executor executor = ContextCompat.getMainExecutor(this);
-//        // this will give us result of AUTHENTICATION
-//        final BiometricPrompt biometricPrompt = new BiometricPrompt(OTPVerification.this, executor, new BiometricPrompt.AuthenticationCallback() {
-//            @Override
-//            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-//                super.onAuthenticationError(errorCode, errString);
-//            }
-//
-//            // THIS METHOD IS CALLED WHEN AUTHENTICATION IS SUCCESS
-//            @Override
-//            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-//                super.onAuthenticationSucceeded(result);
-//                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-//                msgtex.setText("Login Successful");
-//                Intent intent = new Intent(OTPVerification.this,HomeActivity.class);
-//                startActivity(intent);
-//            }
-//            @Override
-//            public void onAuthenticationFailed() {
-//                super.onAuthenticationFailed();
-//            }
-//        });
-//
-//        // creating a variable for our promptInfo
-//        // BIOMETRIC DIALOG
-//        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-//                .setTitle(getResources().getString(R.string.app_name))
-//                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
-//        ib_fingerlogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                biometricPrompt.authenticate(promptInfo);
-//
-//            }
-//        });
-//    }
-
-    private void initView() {
-        ib_fingerlogin = findViewById(R.id.btnFingerprintLock);
-        msgtex = findViewById(R.id.txt_fingerprint);
-
-        OTPEt1 = findViewById(R.id.otpET1);
-        OTPEt2 = findViewById(R.id.otpET2);
-        OTPEt3 = findViewById(R.id.otpET3);
-        OTPEt4 = findViewById(R.id.otpET4);
-
-        resendBtn = findViewById(R.id.resendOtp);
-        verifyBtn = findViewById(R.id.verifyOtpBtn);
-        Or = (LinearLayout) findViewById(R.id.or);
-
-        final TextView otpEmail = findViewById(R.id.otpEmail);
-
-    }
-
-    private void showKeyboard(EditText otpEt) {
-        otpEt.requestFocus();
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.showSoftInput(otpEt, InputMethodManager.SHOW_IMPLICIT);
-    }
-
-    private void startCountDownTimer() {
-        resnedEnabled = false;
-        resendBtn.setTextColor(Color.parseColor("#99000000"));
-
-        new CountDownTimer(resendTime * 1000, 1000) {
-
+        pinview.setPinViewEventListener(new Pinview.PinViewEventListener() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                resendBtn.setText("Resend Code ( " + (millisUntilFinished / 60) + ")");
-            }
-
-            @Override
-            public void onFinish() {
-                resnedEnabled = true;
-                resendBtn.setText("Resend Code");
-                resendBtn.setTextColor(getResources().getColor(R.color.primary));
-            }
-        }.start();
-    }
-
-
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (s.length() > 0) {
-                if (selectedETPosition == 0) {
-                    selectedETPosition = 1;
-                    showKeyboard(OTPEt2);
-                } else if (selectedETPosition == 1) {
-                    selectedETPosition = 2;
-                    showKeyboard(OTPEt3);
-                } else if (selectedETPosition == 2) {
-                    selectedETPosition = 3;
-                    showKeyboard(OTPEt4);
+            public void onDataEntered(Pinview pinview, boolean fromUser) {
+                String pin = pinview.getValue();
+                if (!pin.equals(name)){
+                    Toast.makeText(OTPVerification.this, "Wrong Pin", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent i = new Intent(OTPVerification.this , HomeActivity.class);
+                    startActivity(i);
                 }
             }
+        });
+
+        SharedPreferences sharedPreferences = getSharedPreferences(OTPVerification.PREFS_NAME, 0);
+        boolean Is_checked = sharedPreferences.getBoolean("value", true);
+        if (Is_checked) {
+            ib_fingerlogin.setVisibility(View.VISIBLE);
+
+
+        } else {
+            ib_fingerlogin.setVisibility(View.GONE);
         }
-    };
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            if (selectedETPosition == 3) {
-                selectedETPosition = 2;
-                showKeyboard(OTPEt3);
-            } else if (selectedETPosition == 2) {
-                selectedETPosition = 1;
+    }
 
-                showKeyboard(OTPEt2);
-            } else if (selectedETPosition == 1) {
-                selectedETPosition = 0;
-                showKeyboard(OTPEt1);
+
+    private void biometric() {
+
+        // BIOMETRIC FINGERPRINT
+        BiometricManager biometricManager = BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate()) {
+
+            // this means we can use biometric sensor
+            case BiometricManager.BIOMETRIC_SUCCESS:
+                msgtex.setText("You can use the fingerprint sensor to login");
+                msgtex.setTextColor(Color.parseColor("#fafafa"));
+                break;
+
+            // this means that the device doesn't have fingerprint sensor
+            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                msgtex.setText("This device doesnot have a fingerprint sensor");
+                ib_fingerlogin.setVisibility(View.GONE);
+                break;
+
+            // this means that biometric sensor is not available
+            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                msgtex.setText("The biometric sensor is currently unavailable");
+                ib_fingerlogin.setVisibility(View.GONE);
+                break;
+
+            // this means that the device doesn't contain your fingerprint
+            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                msgtex.setText("Your device doesn't have fingerprint saved,please check your security settings");
+                ib_fingerlogin.setVisibility(View.GONE);
+                break;
+        }
+
+
+        Executor executor = ContextCompat.getMainExecutor(this);
+        // this will give us result of AUTHENTICATION
+        final BiometricPrompt biometricPrompt = new BiometricPrompt(OTPVerification.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
             }
 
-            return true;
-        } else {
-            return super.onKeyUp(keyCode, event);
-        }
+            // THIS METHOD IS CALLED WHEN AUTHENTICATION IS SUCCESS
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                msgtex.setText("Login Successful");
+                Intent intent = new Intent(OTPVerification.this, HomeActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+        });
+
+        // creating a variable for our promptInfo
+        // BIOMETRIC DIALOG
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle(getResources().getString(R.string.app_name))
+                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
+        ib_fingerlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                biometricPrompt.authenticate(promptInfo);
+
+            }
+        });
+
+//        login_tp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(OTPVerification.this , LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
-    @Override
-    public void onClick(View v) {
-       if (v.getId() == R.id.resendOtp){
-           if (resnedEnabled) {
-               // handle your resend code here
+    private void initView() {
+//        login_tp = findViewById(R.id.login_tp);
+        msgtex = findViewById(R.id.txt_fingerprint);
+        pinview = findViewById(R.id.myPinViewID);
+        ib_fingerlogin = findViewById(R.id.btnFingerprintLock);
+//        verifyBtn = findViewById(R.id.verifyOtpBtn);
 
-               // start new resend count down timer
-               startCountDownTimer();
-           }
-       }
-       else if (v.getId() == R.id.verifyOtpBtn){
-           final String generateOtp = OTPEt1.getText().toString()
-                   + OTPEt2.getText().toString()
-                   + OTPEt3.getText().toString()
-                   + OTPEt4.getText().toString();
-
-           if (generateOtp.length() == 4) {
-               // handle your otp verification here
-           }
-           Intent intent = new Intent(OTPVerification.this,HomeActivity.class);
-           startActivity(intent);
-       }
     }
+
 }

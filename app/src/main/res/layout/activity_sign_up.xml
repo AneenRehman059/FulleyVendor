@@ -7,14 +7,6 @@
     android:orientation="vertical"
     tools:context=".SignUp.SignUpActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_220sdp"
-        android:background="@drawable/bottom_round_gradient_bg_style">
-
-    </RelativeLayout>
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,30 +17,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="@dimen/_13sdp"
-                android:background="#00000000"
-                android:onClick="closeBtn"
-                android:src="@drawable/ic_close"
-                app:tint="@color/secondary" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:cardCornerRadius="@dimen/_15sdp"
-                app:cardElevation="@dimen/_4sdp"
-                app:cardUseCompatPadding="true">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_14sdp"
-
                     android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_150sdp"
+                        android:src="@drawable/n11"
+                        android:layout_gravity="center"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -56,22 +35,6 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FUELLY"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                            android:textColor="@color/primary"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_25sdp"
-                            android:text="Fuel Management Framework"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/secondary" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -110,6 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
+                            android:background="@drawable/ed_background"
                             android:textColor="@color/black"
                             android:textColorHint="#72000000" />
 
@@ -139,6 +103,7 @@
                             android:id="@+id/signupPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/ed_background"
                             android:inputType="number"
                             android:maxLength="11"
                             android:textColor="@color/black"
@@ -170,6 +135,7 @@
                             android:id="@+id/signupPin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/ed_background"
                             android:inputType="number"
                             android:textColor="@color/black"
                             android:textColorHint="#72000000" />
@@ -200,6 +166,7 @@
                             android:id="@+id/signupCnfPin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/ed_background"
                             android:inputType="number"
                             android:textColor="@color/black"
                             android:textColorHint="#72000000" />
@@ -255,9 +222,6 @@
 
                     </LinearLayout>
                 </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

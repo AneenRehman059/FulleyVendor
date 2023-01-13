@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 public class Change_Tpin_Activity extends AppCompatActivity implements View.OnClickListener {
     CheckBox show_tpin;
-    EditText existing_pass,new_pass,confirm_pass;
+    EditText existing_pass, new_pass, confirm_pass;
     ImageButton back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,22 +28,18 @@ public class Change_Tpin_Activity extends AppCompatActivity implements View.OnCl
         show_tpin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     existing_pass.setTransformationMethod(new PasswordTransformationMethod());
                     new_pass.setTransformationMethod(new PasswordTransformationMethod());
                     confirm_pass.setTransformationMethod(new PasswordTransformationMethod());
-
                     show_tpin.setText(R.string.hide_password);
 
-                }
-                else {
+                } else {
                     existing_pass.setTransformationMethod(null);
                     new_pass.setTransformationMethod(null);
                     confirm_pass.setTransformationMethod(null);
                     show_tpin.setText(R.string.show_password);
                 }
-
-
             }
         });
     }
@@ -57,7 +54,7 @@ public class Change_Tpin_Activity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back_img){
+        if (v.getId() == R.id.back_img) {
             finish();
         }
     }

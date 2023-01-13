@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -34,6 +38,10 @@ import com.zasa.fuellyvendor.models.GetQrData_Model;
 import com.zasa.fuellyvendor.models.getFuelUp;
 
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +52,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
     Context context;
     ProgressDialog progressDialog;
     String code;
+    String address;
     String fuelUpLocation;
     int expireQr;
     double actualFuel, fuelLimit;
@@ -56,6 +65,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
     String longitude;
     LocationManager locationManager;
     private static final int REQUEST_LOCATION = 1;
+    LocationListener locationListener;
     String loca;
     SharedPreferences sharedPreference;
 
@@ -88,6 +98,45 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
         requestForCameraPermission();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if(ActivityCompat.checkSelfPermission(ScannerViewActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(ScannerViewActivity.this, new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION
+                    },REQUEST_LOCATION);
+        }
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                final  double latitude = location.getLatitude();
+                final  double longitude = location.getLongitude();
+
+                ////////// getting full address by lat long start///////////////
+                try {
+                    Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    List<Address> addresses = geocoder.getFromLocation(latitude , longitude , 1);
+                    address = addresses.get(0).getAddressLine(0);
+
+//                    Toast.makeText(ScannerViewActivity.this, address, Toast.LENGTH_SHORT).show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ////////// getting full address by lat long end///////////////
+
+//                Toast.makeText(ScannerViewActivity.this, "Latitude: "+String.valueOf(latitude)+" , Longitude: "+String.valueOf(longitude), Toast.LENGTH_SHORT).show();
+            }
+        };
+        try {
+            locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER,0,0,locationListener);
+            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,0,0,locationListener);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // check gps enable or not
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             // write function to enable gps
@@ -99,23 +148,15 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
     }
 
     private void getQrData() {
-
         //        s = getIntent().getStringExtra("code")
-
         String fullQr = code;
-
 //        fullQr.substring(0,1) != "U"
-
-        if (code.startsWith("U")) {
-
-            String splitQr = code.split("U")[1];
-
-            Call<GetQrData_Model> call = ApiClient.getApiService().getQRData(1, splitQr);
+        if (!code.startsWith("U")) {
+//            String splitQr = code.split("V")[1];
+            Call<GetQrData_Model> call = ApiClient.getApiService().getQRData(1, code);
             call.enqueue(new Callback<GetQrData_Model>() {
                 @Override
                 public void onResponse(Call<GetQrData_Model> call, Response<GetQrData_Model> response) {
-                    Toast.makeText(ScannerViewActivity.this, splitQr, Toast.LENGTH_SHORT).show();
-
                     GetQrData_Model qrDetails = response.body();
 
                     expireQr = qrDetails.getQR_Details().getQR_Expiry();
@@ -125,26 +166,26 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
 
                     if (response.isSuccessful()) {
                         String loginPumpCode = sharedPreference.getString(KEY_PUMP_CODE, null);
-                        Toast.makeText(context, qrDetails.getQR_Details().getFix_Pump_Code(), Toast.LENGTH_SHORT).show();
                         if (qrDetails.getQR_Details().getFix_Pump_Code() != null) {
+//                            Toast.makeText(ScannerViewActivity.this, qrDetails.getQR_Details().getMember_FName(), Toast.LENGTH_SHORT).show();
                             if (qrDetails.getQR_Details().getFix_Pump_Code().equals(loginPumpCode)) {
-                                Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(splitQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                                Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(code, loginPumpCode, expireQr, actualFuel, latitude, longitude, address);
                                 callFuelUp.enqueue(new Callback<getFuelUp>() {
                                     @Override
                                     public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
                                         getFuelUp fuelUp = response.body();
                                         if (response.isSuccessful()) {
-
                                             double fLimit;
                                             fLimit = fuelLimit;
                                             actualFuel = fLimit;
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
                                             intent.putExtra("code", code);
                                             startActivity(intent);
-                                            Toast.makeText(ScannerViewActivity.this, "Fuel Up Plaease", Toast.LENGTH_SHORT).show();
+
 
                                         } else {
-                                            Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ScannerViewActivity.this, "Response error", Toast.LENGTH_SHORT).show();
                                         }
                                     }
 
@@ -153,11 +194,14 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                         Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            } else {
+                            }
+                            else {
                                 new PumpWarningError().Show_Toast(ScannerViewActivity.this, view, getString(R.string.not_allow));
                             }
-                        } else {
-                            Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
+                        }
+
+                        else {
+                            Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, address);
                             callFuelUp.enqueue(new Callback<getFuelUp>() {
                                 @Override
                                 public void onResponse(Call<getFuelUp> call, Response<getFuelUp> response) {
@@ -196,8 +240,9 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                     new CustomToastError().Show_Toast(ScannerViewActivity.this, view, Constants.EXCEPTION_MESSAGE);
                 }
             });
-        } else {
+        }
 
+        else {
             Call<GetQrData_Model> callQr = ApiClient.getApiService().getQRData(1, fullQr);
             callQr.enqueue(new Callback<GetQrData_Model>() {
                 @Override
@@ -209,9 +254,10 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                         actualFuel = qrDetails.getQR_Details().getActual_Fuel();
                         fuelUpLocation = qrDetails.getQR_Details().getFuel_Up_Location();
                         fuelLimit = qrDetails.getQR_Details().getFuel_Limit();
+                        String fleetNo = qrDetails.getQR_Details().getFleet_Code();
 
                         if (qrDetails.getQR_Details().getFix_Pump_Code() != null) {
-                            if (qrDetails.getQR_Details().getFix_Pump_Code().equals(loginPumpCode)) {
+//                            if (qrDetails.getQR_Details().getFix_Pump_Code().equals(loginPumpCode)) {
                                 Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
                                 callFuelUp.enqueue(new Callback<getFuelUp>() {
                                     @Override
@@ -228,8 +274,9 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
 
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
                                             intent.putExtra("code", code);
+                                            intent.putExtra("fleet_no",fleetNo);
+                                            intent.putExtra("fuel_limit",actualFuel);
                                             startActivity(intent);
-                                            Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
 
                                         } else {
                                             Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();
@@ -241,11 +288,13 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                         Toast.makeText(ScannerViewActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            } else {
-                                new PumpWarningError().Show_Toast(ScannerViewActivity.this, view, getString(R.string.not_allow));
-
-                            }
-                        } else {
+//                            }
+//                            else {
+//                                new PumpWarningError().Show_Toast(ScannerViewActivity.this, view, getString(R.string.not_allow));
+//
+//                            }
+                        }
+                        else {
                             Call<getFuelUp> callFuelUp = ApiClient.getApiService().getQrFuelup(fullQr, loginPumpCode, expireQr, actualFuel, latitude, longitude, fuelUpLocation);
                             callFuelUp.enqueue(new Callback<getFuelUp>() {
                                 @Override
@@ -258,7 +307,7 @@ public class ScannerViewActivity extends AppCompatActivity implements ZXingScann
                                             Intent intent = new Intent(ScannerViewActivity.this, Check_Fuel_LimitActivity.class);
                                             intent.putExtra("code", code);
                                             startActivity(intent);
-                                            Toast.makeText(ScannerViewActivity.this, "Added", Toast.LENGTH_SHORT).show();
+
                                         }
                                     } else {
                                         Toast.makeText(ScannerViewActivity.this, fuelUp.getMessage(), Toast.LENGTH_SHORT).show();

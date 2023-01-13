@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/innerlayout"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/lay1"
+            android:id="@+id/main_lay"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary">
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/btnLogout"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:paddingVertical="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_logout" />
+                android:src="@drawable/ic_logot" />
 
             <TextView
-                android:id="@+id/tvUserName"
+                android:id="@+id/tvHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
@@ -36,7 +39,7 @@
                 android:maxLines="1"
                 android:text="Welcome back"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:textStyle="bold">
 
             </TextView>
@@ -46,21 +49,19 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/btn_contactUs"
+                android:layout_toLeftOf="@+id/btn_contact"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_notification"
-                app:tint="@color/white" />
+                android:src="@drawable/baseline_notifications" />
 
             <ImageView
-                android:id="@+id/btn_contactUs"
+                android:id="@+id/btn_contact"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:paddingVertical="5dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_phone"
-                app:tint="@color/white" />
+                android:src="@drawable/local_phone" />
 
 
         </RelativeLayout>
@@ -68,8 +69,8 @@
         <View
             android:id="@+id/view_toolbar_shadow"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/toolbar_shadow" />
+            android:layout_height="1dp"
+            android:background="@color/primary" />
 
 
         <ScrollView
@@ -77,21 +78,11 @@
             android:layout_height="wrap_content"
             android:scrollbars="none">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/indicatorLay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_6sdp"
-                    android:visibility="gone"
-
-                    android:gravity="center"
-                    android:orientation="horizontal" />
-
 
                 <LinearLayout
                     android:id="@+id/tab0"
@@ -99,6 +90,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,10 +125,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/imageView"
@@ -145,7 +137,7 @@
                             android:elevation="@dimen/_10sdp"
                             android:scaleType="fitXY"
 
-                           />
+                            />
 
                     </LinearLayout>
 
@@ -164,7 +156,7 @@
                             app:cardUseCompatPadding="true"
                             app:contentPadding="0dp">
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:background="@drawable/gradient_bg_style"
@@ -174,6 +166,7 @@
                                 android:paddingLeft="@dimen/_15sdp">
 
                                 <TextView
+                                    android:id="@+id/tvToday_sale"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_6sdp"
@@ -181,12 +174,13 @@
                                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                     android:textColor="@color/white" />
 
-                                <androidx.appcompat.widget.LinearLayoutCompat
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/tv_ltrs"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Ltrs. "
@@ -195,16 +189,17 @@
                                         android:textStyle="bold" />
 
                                     <TextView
+                                        android:id="@+id/tv_ltrs_amount"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="125,000"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                                         android:textColor="@color/white"
                                         android:textStyle="bold" />
-                                </androidx.appcompat.widget.LinearLayoutCompat>
+                                </LinearLayout>
 
 
-                            </androidx.appcompat.widget.LinearLayoutCompat>
+                            </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
@@ -216,13 +211,13 @@
                             app:cardElevation="@dimen/_4sdp"
                             app:cardUseCompatPadding="true">
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/gradient_bg_style1"
                                 android:orientation="vertical">
 
-                                <androidx.appcompat.widget.LinearLayoutCompat
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
@@ -230,9 +225,9 @@
                                     app:cardPreventCornerOverlap="true">
 
                                     <androidx.appcompat.widget.LinearLayoutCompat
+                                        android:id="@+id/super_layout"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/super_layout"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
                                         android:gravity="center"
@@ -241,17 +236,17 @@
                                         android:paddingVertical="@dimen/_8sdp">
 
                                         <TextView
+                                            android:id="@+id/tvsuper_title"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:id="@+id/super_title"
                                             android:text=""
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                             android:textColor="@color/bulish" />
 
                                         <TextView
+                                            android:id="@+id/super_total_price"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:id="@+id/super_total_price"
                                             android:text="122,000"
                                             android:textColor="@color/bulish"
                                             android:textStyle="bold" />
@@ -259,9 +254,9 @@
 
 
                                     <androidx.appcompat.widget.LinearLayoutCompat
+                                        android:id="@+id/hi_oct_layout"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/hi_oct_layout"
                                         android:layout_marginHorizontal="@dimen/_1sdp"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
@@ -271,14 +266,15 @@
                                         android:paddingVertical="@dimen/_8sdp">
 
                                         <TextView
+                                            android:id="@+id/tvhiOct_title"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:id="@+id/hiOct_title"
                                             android:text=""
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                             android:textColor="@color/bulish" />
 
                                         <TextView
+                                            android:id="@+id/high_oct_total_price"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="80,000"
@@ -287,9 +283,9 @@
                                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                                     <androidx.appcompat.widget.LinearLayoutCompat
+                                        android:id="@+id/layout_diesel"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/layout_diesel"
                                         android:layout_weight="1"
                                         android:background="@color/primaryLight"
                                         android:gravity="center"
@@ -298,14 +294,15 @@
                                         android:paddingVertical="@dimen/_8sdp">
 
                                         <TextView
+                                            android:id="@+id/tvdiesel_title"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text=""
-                                            android:id="@+id/diesel_title"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                             android:textColor="@color/bulish" />
 
                                         <TextView
+                                            android:id="@+id/diesel_total_price"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="195,000"
@@ -313,10 +310,9 @@
                                             android:textStyle="bold" />
                                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                                </LinearLayout>
 
-                                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                                <androidx.appcompat.widget.LinearLayoutCompat
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_1sdp"
@@ -336,14 +332,15 @@
                                         android:paddingVertical="@dimen/_8sdp">
 
                                         <TextView
+                                            android:id="@+id/tvcng_title"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text=""
-                                            android:id="@+id/cng_title"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                             android:textColor="@color/bulish" />
 
                                         <TextView
+                                            android:id="@+id/cng_total_price"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="65,000"
@@ -351,18 +348,14 @@
                                             android:textStyle="bold" />
                                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                                </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                            </androidx.appcompat.widget.LinearLayoutCompat>
+                                </LinearLayout>
+                            </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
 
-
-
                     </LinearLayout>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_30sdp"
@@ -370,28 +363,28 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tvSettled_payment"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Settled Payment: "
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/tv_settle_amount"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_weight="1"
-                            android:text="650,000"
                             android:gravity="end"
+                            android:text="650,000"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    </LinearLayout>
                 </LinearLayout>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
+            </LinearLayout>
         </ScrollView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</FrameLayout>
+    </LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,11 +2,13 @@ package com.zasa.fuellyvendor.Fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,9 +19,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zasa.fuellyvendor.Helper;
 import com.zasa.fuellyvendor.HomeActivity;
+import com.zasa.fuellyvendor.PrefsManager;
 import com.zasa.fuellyvendor.R;
 
 import java.text.DateFormat;
@@ -34,8 +39,13 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
+    RelativeLayout lay2;
+    ImageView back_button;
+    LinearLayoutCompat layout_ledger;
     LinearLayout fromlayout, tolayout, main_date_layout;
-    TextView tvFromdate, tvTodate,ledger_date,startDate,endDate;
+    TextView tvFromdate, tvTodate,txt_frmDate,txtTodate,ledger_date,startDate,endDate , tvLedger;
+    TextView txt_date,txt_c_name,txt_p_name,txt_quantitiy,date,comapny_name,pump_name,quantity,amount;
+    TextView txt_date1,txt_c_name1,txt_p_name1,txt_quantitiy1,date1,comapny_name1,pump_name1,quantity1,amount1;
     DatePickerDialog.OnDateSetListener setListener;
 
     @Override
@@ -44,18 +54,45 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ledger, container, false);
 
+        txt_date = view.findViewById(R.id.txt_date);
+        txt_c_name = view.findViewById(R.id.txt_c_name);
+        txt_p_name = view.findViewById(R.id.txt_p_name);
+        txt_quantitiy = view.findViewById(R.id.txt_quantity);
+        date = view.findViewById(R.id.date);
+        comapny_name = view.findViewById(R.id.company_name);
+        pump_name = view.findViewById(R.id.pump_name);
+        quantity = view.findViewById(R.id.quantity);
+        amount = view.findViewById(R.id.amount);
 
+        txt_date1 = view.findViewById(R.id.txt_date1);
+        txt_c_name1 = view.findViewById(R.id.txt_c_name1);
+        txt_p_name1 = view.findViewById(R.id.txt_p_name1);
+        txt_quantitiy1 = view.findViewById(R.id.txt_quantity1);
+        date1 = view.findViewById(R.id.date1);
+        comapny_name1 = view.findViewById(R.id.company_name1);
+        pump_name1 = view.findViewById(R.id.pump_name1);
+        quantity1 = view.findViewById(R.id.quantity1);
+        amount1 = view.findViewById(R.id.amount1);
+
+        lay2 = view.findViewById(R.id.lay2);
+        tvLedger = view.findViewById(R.id.tvLedger);
+        back_button = (ImageView) view.findViewById(R.id.m2);
         fromlayout = view.findViewById(R.id.from_date_layout);
         tolayout = view.findViewById(R.id.to_date_layout);
         main_date_layout = view.findViewById(R.id.main_layout_date);
         tvFromdate = view.findViewById(R.id.tv_from_date);
         tvTodate = view.findViewById(R.id.tv_to_date);
+        layout_ledger = view.findViewById(R.id.ledger_Layout);
+        txt_frmDate = view.findViewById(R.id.txt_from_date);
+        txtTodate = view.findViewById(R.id.txt_to_date);
 
-
+        back_button.setOnClickListener(this);
         fromlayout.setOnClickListener(this);
         tolayout.setOnClickListener(this);
 
-
+        if (PrefsManager.IsDarkModeOn()) {
+            setDarkMode();
+        }
 
         return view;
     }
@@ -64,8 +101,13 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.back_img:
-                getActivity().onBackPressed();
+//            case R.id.back_img:
+//                getActivity().onBackPressed();
+//                break;
+
+            case R.id.m2:
+                Intent intent = new Intent(getContext(),HomeActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.from_date_layout:
@@ -116,8 +158,46 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
                 };
                 break;
         }
+
     }
 
+    private void setDarkMode() {
+        Helper.setDarkModeOnOff(getContext(), layout_ledger);
+
+        if (PrefsManager.IsDarkModeOn()) {
+
+            lay2.setBackgroundColor(getContext().getResources().getColor(R.color.black, getContext().getTheme()));
+            back_button.setColorFilter(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            tvLedger.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_frmDate.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txtTodate.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            tvFromdate.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            tvTodate.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+
+            txt_date.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_c_name.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_p_name.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_quantitiy.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            date.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            comapny_name.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            pump_name.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            quantity.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            amount.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+
+            txt_date1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_c_name1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_p_name1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            txt_quantitiy1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            date1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            comapny_name1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            pump_name1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            quantity1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+            amount1.setTextColor(getContext().getResources().getColor(R.color.white, getContext().getTheme()));
+        }
+        else {
+
+        }
+    }
 
     @Override
     public void onDestroyView() {
@@ -125,5 +205,4 @@ public class LedgerFragment extends Fragment implements View.OnClickListener {
 //        ((HomeActivity) requireActivity()).setDrawerUnlocked();
 
     }
-
 }
